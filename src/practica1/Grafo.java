@@ -8,8 +8,8 @@ import java.util.TreeMap;
 
 public class Grafo {
 	
-	private final Map<Integer, Vertice> vertices = new TreeMap<Integer, Vertice>();
-	private final List<Arista> aristas = new ArrayList<Arista>();
+	private Map<Integer, Vertice> vertices = new TreeMap<Integer, Vertice>();
+	private List<Arista> aristas = new ArrayList<Arista>();
 	
 	public Grafo(boolean[][] matriz, Hashtable<Integer, Producto> productos) {
 		//System.out.println(matriz.length);
@@ -28,6 +28,12 @@ public class Grafo {
 		}
 	}
 	
+	public Grafo(Map<Integer, Vertice> vertices, List<Arista> aristas) {
+		// TODO Auto-generated constructor stub
+		this.vertices =  new TreeMap<Integer, Vertice>(vertices);
+		this.aristas = new ArrayList<Arista>(aristas);
+	}
+	
 	public Vertice getVertice(int indice, Hashtable<Integer, Producto> productos) {
         Vertice v;
         if ((v = vertices.get(indice)) == null) {
@@ -35,6 +41,18 @@ public class Grafo {
         	vertices.put(indice, v);        	
         }
         return v;    
+	}
+	
+	public List<Arista> getAristas() {
+		return this.aristas;
+	}
+	
+	public Map<Integer, Vertice> getVertices() {
+		return this.vertices;
+	}
+	
+	public Grafo copiarGrafo(){
+		return new Grafo(this.vertices, this.aristas);
 	}
 	
 	@Override
