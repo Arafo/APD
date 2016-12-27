@@ -26,4 +26,10 @@ public class Arista {
 	public void setDestino(int destino) {
 		this.destino = destino;
 	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Arista: "+this.origen+"-"+this.destino;
+	}
 }
