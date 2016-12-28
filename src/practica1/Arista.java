@@ -7,6 +7,7 @@ public class Arista {
 	
 	private int origen;
 	private int destino;
+	private String conexionOriginal;
 	
 	//private final List<Vertice> vertices = new ArrayList<Vertice>();
 	
@@ -14,6 +15,7 @@ public class Arista {
 		super();
 		this.origen = origen;
 		this.destino = destino;
+		this.conexionOriginal = origen + "-" + destino;
 	}
 	
 	/*public Arista(Vertice origen, Vertice destino) {
@@ -67,6 +69,10 @@ public class Arista {
 		this.destino = destino;
 	}
 	
+	public String getConexionOriginal() {
+		return conexionOriginal;
+	}
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub

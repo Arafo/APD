@@ -11,7 +11,7 @@ import practica1.Vertice;
  * Referencia:
  * http://www.geeksforgeeks.org/kargers-algorithm-for-minimum-cut-set-1-introduction-and-implementation/
  * 
- * @author Portátil1
+ * @author Portï¿½til1
  *
  */
 public class KargerAlgorithm implements MinCut {
@@ -39,46 +39,59 @@ public class KargerAlgorithm implements MinCut {
 			if (aristaActual.getOrigen() == aristaActual.getDestino())
 				continue;
 
-			unir(aristaActual.getOrigen(), aristaActual.getDestino());
-			System.out.println();
+			unir(aristaActual.getOrigen(), aristaActual.getDestino(), aristaActual);
+			//System.out.println();
 			System.out.println();
 			System.out.println(this.grafoCopia.toString());
 			
 
 		}
+		
+		// Aristas en el corte
 		System.out.println("MINCUT: " + this.grafoCopia.getAristas().size());
+		for (Arista a : this.grafoCopia.getAristas())
+			System.out.println("Arista " + a.getConexionOriginal());
+		
 		return this.grafoCopia;
 	}
 	
 	/**
 	 * Metodo que une dos aristas del grafo
 	 */
-	private void unir(int vertice1, int vertice2) {
+	private void unir(int vertice1, int vertice2, Arista arista) {
 		//vertices a partir arista
 		Vertice v1 = this.grafoCopia.getVertices().remove(vertice1);
+		v1.getAristas().remove(arista);
 		Vertice v2 = this.grafoCopia.getVertices().remove(vertice2);
-		
+		v2.getAristas().remove(arista);
+
 		Vertice unido = new Vertice(v1.getIndice());
         
+		// Redirigir las aristas de v1 al vertice unido
         for (Iterator<Arista> it = v1.getAristas().iterator(); it.hasNext();) {
         	Arista a = it.next();
         	it.remove();
         	if (a.getVerticeOpuesto(v1) == unido.getIndice()) {
+        		// Quitar bucles
         		unido.getAristas().remove(a);
         		this.grafoCopia.getAristas().remove(a);
         	} else {
+        		// Reemplaza v1 por unido
         		a.reemplazarVertice(v1, unido);
         		unido.addArista(a);
         	}
         }
         
+		// Redirigir las aristas de v2 al vertice unido
         for (Iterator<Arista> it = v2.getAristas().iterator(); it.hasNext();) {
         	Arista a = it.next();
         	it.remove();
         	if (a.getVerticeOpuesto(v2) == unido.getIndice()) {
+        		// Quitar bucles
         		unido.getAristas().remove(a);
         		this.grafoCopia.getAristas().remove(a);
         	} else {
+        		// Reemplaza v2 por unido
         		a.reemplazarVertice(v2, unido);
         		unido.addArista(a);
         	}
