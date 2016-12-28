@@ -59,13 +59,13 @@ public class KargerAlgorithm implements MinCut {
 		if(v1.getAristas().size() <= v2.getAristas().size())
 		{
 			
-			v2.fusionarVertices(v1);
-			this.grafoCopia.getVertices().put(v2.getIndice(), v2);
+			//v2.fusionarVertices(v1);
+			//this.grafoCopia.getVertices().put(v2.getIndice(), v2);
 		}
 		else
 		{
-			v1.fusionarVertices(v2);
-			this.grafoCopia.getVertices().put(v1.getIndice(), v1);
+			//v1.fusionarVertices(v2);
+			//this.grafoCopia.getVertices().put(v1.getIndice(), v1);
 			
 		}
 		

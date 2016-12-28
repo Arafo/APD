@@ -1,23 +1,62 @@
 package practica1;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Vertice {
-
+	
 	private int indice;
-	// en un vertice hay varios indices segun el algoritmo
-	private ArrayList<Vertice> verticesInternos;
-	private ArrayList<Arista> aristas;
-
+	private Producto producto;
+	private Set<Arista> aristas = new HashSet<Arista>();
+	
 	public Vertice(int indice) {
 		super();
 		this.indice = indice;
-		this.verticesInternos=new ArrayList<Vertice>();
-		this.aristas = new ArrayList<Arista>();
+	}
+	
+	public Vertice(int indice, Producto producto) {
+		super();
+		this.indice = indice;
+		this.producto = producto;
+	}
+	
+	public void addArista(Arista arista) {
+		aristas.add(arista);	
+	}
+	
+	public Arista getAristaA(Vertice v) {
+		for (Arista arista : aristas) {
+			if (arista.contiene(this, v))
+				return arista;	
+		}
+		return null;	
 	}
 
+	public Set<Arista> getAristas() {
+		return aristas;
+	}
+
+	public int getIndice() {
+		return indice;
+	}
+
+	public void setIndice(int indice) {
+		this.indice = indice;
+	}
+
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+	
+	
+	
+	/*
 	public void fusionarVertices(Vertice v) {
-			System.out.println("Fusionando "+this.indice+"--"+v.getIndice());
+		
 			for(int i=0;i<v.getAristas().size();i++){
 				Arista aux=v.getAristas().get(i);
 				//si el grafo no conecta los dos vertices 
@@ -32,30 +71,9 @@ public class Vertice {
 					}
 				}
 			}
-			this.verticesInternos.add(v);
+			//this.verticesInternos.add(v);
 			
 	}
-
-	public int getIndice() {
-		return indice;
-	}
-
-	public void setIndice(int indice) {
-		this.indice = indice;
-	}
-
-	public ArrayList<Vertice> getVerticesInternos() {
-		return this.verticesInternos;
-	}
-
-	public ArrayList<Arista> getAristas() {
-		return this.aristas;
-	}
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		String resultado = "Vertice " + this.indice;
-		return resultado;
-	}
+	*/
+	
 }

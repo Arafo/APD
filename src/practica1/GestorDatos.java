@@ -72,14 +72,14 @@ public class GestorDatos {
         Random r = new Random();
 
         /*
-         * Generación de productos
+         * Generaciï¿½n de productos
          */
         
         String nombre;
         int unidades;
         double precio;
         
-        for (int i = 1; i <= productos; i++) {
+        for (int i = 0; i < productos; i++) {
         	nombre = "Producto" + i;
             unidades = 1 + r.nextInt(MAX_UNIDADES);
             precio = r.nextDouble() * MAX_PRECIO;
@@ -89,14 +89,35 @@ public class GestorDatos {
         pw1.close();
 
         /*
-         * Generación de relaciones entre productos
+         * Generaciï¿½n de relaciones entre productos
          */
+        
+        //boolean conectado = false;
+        boolean matriz[][] = new boolean[productos][productos];
+        for (int i = 0; i < productos; i++) {
+        	for (int j = 0; j < productos; j++) {
+        		if (i == j) 
+        			matriz[i][j] = false;
+        		else if (j < i)
+        			matriz[i][j] = matriz[j][i];
+        		else {
+        			matriz[i][j] = r.nextBoolean();
+        			//conectado &= matriz[i][j];
+        		}
+        	}
+        	// Vertice no conectado con nada
+        	/*if (!conectado) {
+        		int s = (productos - i) + r.nextInt(productos - 1);
+        		System.out.println(s);
+        		matriz[i][s] = true;
+        	}*/
+        }
         
     	StringBuilder relacion;
         for (int i = 0; i < productos; i++) {
         	relacion = new StringBuilder();
-            for (int j = i; j < productos; j++) {
-            	relacion.append(r.nextBoolean() + " ");
+            for (int j = 0; j < productos; j++) {
+            	relacion.append(matriz[i][j] + " ");
             }
             pw2.println(relacion);
         }
@@ -122,6 +143,7 @@ public class GestorDatos {
 		    			Integer.parseInt(st.nextToken()), 
 		    			Double.parseDouble(st.nextToken()));
 		    	tabla.put(key, p);
+		    	key++;
 		    	
 		        line = br.readLine();
 		        //System.out.println(p.getNombre() + " " + p.getUnidades() + " " + p.getPrecio());
@@ -176,9 +198,12 @@ public class GestorDatos {
 		// Para que las comas sean puntos
 		Locale.setDefault(new Locale("en", "UK"));
 		
-		GestorDatos gd = new GestorDatos(1000, false);
+		GestorDatos gd = new GestorDatos(10, true);
 		gd.generarDatos(FICHERO_PRODUCTOS, FICHERO_RELACIONES);
-		gd.obtenerProductos();
-		gd.obtenerRelaciones();
+		Hashtable<Integer, Producto> productos = gd.obtenerProductos();
+		boolean matriz[][] = gd.obtenerRelaciones();
+		Grafo g = new Grafo(matriz, productos);
+		System.out.println(g.toString());
+		//System.out.println(g.AdjString(matriz));
 	}
 }
