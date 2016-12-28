@@ -26,7 +26,7 @@ public class Vertice {
 	
 	public Arista getAristaA(Vertice v) {
 		for (Arista arista : aristas) {
-			if (arista.contiene(this, v))
+			if (arista.contiene(this.getIndice(), v.getIndice()))
 				return arista;	
 		}
 		return null;	

@@ -8,7 +8,7 @@ public class Arista {
 	private int origen;
 	private int destino;
 	
-	private final List<Vertice> vertices = new ArrayList<Vertice>();
+	//private final List<Vertice> vertices = new ArrayList<Vertice>();
 	
 	public Arista(int origen, int destino) {
 		super();
@@ -16,18 +16,40 @@ public class Arista {
 		this.destino = destino;
 	}
 	
-	public Arista(Vertice origen, Vertice destino) {
+	/*public Arista(Vertice origen, Vertice destino) {
 		vertices.add(origen);
 		vertices.add(destino);
 	}
 
 	public boolean contiene(Vertice v1, Vertice v2 ) {
 		return vertices.contains(v1) && vertices.contains(v2);	
+	}*/
+	
+	public boolean contiene(int v1, int v2) {
+		return (origen == v1 && destino == v2) || (origen == v2 && destino == v1);	
 	}
 	
-	public List<Vertice> getVertices() {
-		return vertices;
+	public void reemplazarVertice(Vertice oldV, Vertice newV) {
+		if (oldV.getIndice() == origen) {
+			origen = newV.getIndice();
+		}
+		else if (oldV.getIndice() == destino) {
+			destino = newV.getIndice();
+		}
+		else {
+			throw new IllegalArgumentException( "Vertice " + oldV.getIndice());
+		}	
 	}
+	
+	public int getVerticeOpuesto(Vertice v) {
+		if (v.getIndice() == origen)
+			return destino;
+		return origen;
+	}
+	
+	/*public List<Vertice> getVertices() {
+		return vertices;
+	}*/
 
 	public int getOrigen() {
 		return origen;
@@ -48,6 +70,6 @@ public class Arista {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "Arista: "+this.origen+"-"+this.destino;
+		return "Arista: " + this.origen + "-" + this.destino;
 	}
 }

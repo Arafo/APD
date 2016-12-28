@@ -19,7 +19,7 @@ public class Grafo {
                 Vertice v2 = getVertice(j, productos);
                 Arista a;
                 if (matriz[i][j] == true && (a = v2.getAristaA(v1)) == null) {
-                    a = new Arista(v1, v2);
+                    a = new Arista(v1.getIndice(), v2.getIndice());
                     aristas.add(a);
                     v1.addArista(a);
                     v2.addArista(a);
@@ -32,6 +32,16 @@ public class Grafo {
 		// TODO Auto-generated constructor stub
 		this.vertices =  new TreeMap<Integer, Vertice>(vertices);
 		this.aristas = new ArrayList<Arista>(aristas);
+		for (Vertice v0 : this.vertices.values()) {
+			for (Vertice v1 : this.vertices.values()) {
+				for (Arista a : this.aristas) {
+					if (a.contiene(v0.getIndice(), v1.getIndice())) {
+						v0.addArista(a);
+	                    v1.addArista(a);
+					}
+				}
+			}
+		}
 	}
 	
 	public Vertice getVertice(int indice, Hashtable<Integer, Producto> productos) {
@@ -59,7 +69,7 @@ public class Grafo {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for (Vertice v1 : vertices.values()) {
-			sb.append(v1.getIndice() + " (" + v1.getProducto().getNombre() + "): ");
+			sb.append(v1.getIndice() + " (" + /*v1.getProducto().getNombre() +*/ "): ");
 			for (Vertice v2 : vertices.values()) {
 				if (v1.getIndice() != v2.getIndice() && v2.getAristaA(v1) != null) {
 					sb.append(" " + v2.getIndice());
