@@ -7,6 +7,7 @@ public class Arista {
 	
 	private int origen;
 	private int destino;
+	private int juntos;
 	private String conexionOriginal;
 	
 	//private final List<Vertice> vertices = new ArrayList<Vertice>();
@@ -15,6 +16,14 @@ public class Arista {
 		super();
 		this.origen = origen;
 		this.destino = destino;
+		this.conexionOriginal = origen + "-" + destino;
+	}
+	
+	public Arista(int origen, int destino, int juntos) {
+		super();
+		this.origen = origen;
+		this.destino = destino;
+		this.juntos = juntos;
 		this.conexionOriginal = origen + "-" + destino;
 	}
 	
@@ -69,6 +78,10 @@ public class Arista {
 		this.destino = destino;
 	}
 	
+	public int getJuntos() {
+		return juntos;
+	}
+
 	public String getConexionOriginal() {
 		return conexionOriginal;
 	}

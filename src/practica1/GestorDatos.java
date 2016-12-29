@@ -19,9 +19,11 @@ public class GestorDatos {
 	// Cosas del producto
 	private final int MAX_UNIDADES = 1000;
 	private final int MAX_PRECIO = 1000;
+	private final int MAX_JUNTOS = 10;
 	
 	private int productos;
 	private boolean override = true;
+	private boolean enteros = false;
 
 	/**
 	 * Constructor
@@ -39,6 +41,18 @@ public class GestorDatos {
 	public GestorDatos(int productos, boolean override) {
 		this.productos = productos;
 		this.override = override;
+	}
+	
+	/**
+	 * Constructor
+	 * @param productos
+	 * @param override
+	 * @param enteros
+	 */
+	public GestorDatos(int productos, boolean override, boolean enteros) {
+		this.productos = productos;
+		this.override = override;
+		this.enteros = enteros;
 	}
 	
 	/**
@@ -93,15 +107,15 @@ public class GestorDatos {
          */
         
         //boolean conectado = false;
-        boolean matriz[][] = new boolean[productos][productos];
+        Object matriz[][] = new Object[productos][productos];
         for (int i = 0; i < productos; i++) {
         	for (int j = 0; j < productos; j++) {
         		if (i == j) 
-        			matriz[i][j] = false;
+        			matriz[i][j] = !enteros ? false : 0;
         		else if (j < i)
         			matriz[i][j] = matriz[j][i];
         		else {
-        			matriz[i][j] = r.nextBoolean();
+        			matriz[i][j] = !enteros ? r.nextBoolean() : r.nextInt(MAX_JUNTOS);
         			//conectado &= matriz[i][j];
         		}
         	}
@@ -192,17 +206,49 @@ public class GestorDatos {
 	
 	/**
 	 * 
+	 * @return
+	 */
+	public int[][] obtenerRelacionesEnteros() {
+		int relaciones[][] = new int[productos][productos];
+		int i = 0, j = 0;
+		
+		try(BufferedReader br = new BufferedReader(new FileReader(FICHERO_RELACIONES))) {
+		    String line = br.readLine();
+
+		    while (line != null) {	    	
+		    	StringTokenizer st = new StringTokenizer(line);
+		        while (st.hasMoreTokens()) {
+		        	relaciones[i][j] = Integer.parseInt(st.nextToken());
+		            i++;          
+		        }       
+		        i = 0;
+		        j++;
+		        
+		        line = br.readLine();
+		    }
+		}
+		catch(IOException e) {
+            System.err.println("Error");
+            System.exit(1);  
+		}
+		
+		return relaciones;
+	}
+	
+	/**
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// Para que las comas sean puntos
 		Locale.setDefault(new Locale("en", "UK"));
 		
-		GestorDatos gd = new GestorDatos(10, true);
+		GestorDatos gd = new GestorDatos(4, true, true);
 		gd.generarDatos(FICHERO_PRODUCTOS, FICHERO_RELACIONES);
 		Hashtable<Integer, Producto> productos = gd.obtenerProductos();
 		boolean matriz[][] = gd.obtenerRelaciones();
-		Grafo g = new Grafo(matriz, productos);
+		int matrizEnteros[][] = gd.obtenerRelacionesEnteros();
+		Grafo g = new Grafo(matrizEnteros, productos);
 		System.out.println(g.toString());
 		//System.out.println(g.AdjString(matriz));
 	}

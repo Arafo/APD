@@ -11,6 +11,11 @@ public class Grafo {
 	private Map<Integer, Vertice> vertices = new TreeMap<Integer, Vertice>();
 	private List<Arista> aristas = new ArrayList<Arista>();
 	
+	/**
+	 * 
+	 * @param matriz
+	 * @param productos
+	 */
 	public Grafo(boolean[][] matriz, Hashtable<Integer, Producto> productos) {
 		//System.out.println(matriz.length);
 		for (int i = 0; i < matriz.length; i++) {
@@ -20,6 +25,28 @@ public class Grafo {
                 Arista a;
                 if (matriz[i][j] == true && (a = v2.getAristaA(v1)) == null) {
                     a = new Arista(v1.getIndice(), v2.getIndice());
+                    aristas.add(a);
+                    v1.addArista(a);
+                    v2.addArista(a);
+                }
+            }
+		}
+	}
+	
+	/**
+	 * 
+	 * @param matriz
+	 * @param productos
+	 */
+	public Grafo(int[][] matriz, Hashtable<Integer, Producto> productos) {
+		//System.out.println(matriz.length);
+		for (int i = 0; i < matriz.length; i++) {
+			Vertice v1 = getVertice(i, productos);
+			for (int j = 0; j < matriz.length; j++) {
+                Vertice v2 = getVertice(j, productos);
+                Arista a;
+                if (matriz[i][j] > 0 && (a = v2.getAristaA(v1)) == null) {
+                    a = new Arista(v1.getIndice(), v2.getIndice(), matriz[i][j]);
                     aristas.add(a);
                     v1.addArista(a);
                     v2.addArista(a);
