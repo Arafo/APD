@@ -1,11 +1,14 @@
 package practica1.minCut;
 
+import java.security.SecureRandom;
 import java.util.Iterator;
 import java.util.Random;
 
 import practica1.Arista;
 import practica1.Grafo;
 import practica1.Vertice;
+import practica1.random.HighQualityRandom;
+import practica1.random.XORShiftRandom;
 
 /**
  * Referencia:
@@ -17,10 +20,16 @@ import practica1.Vertice;
 public class KargerAlgorithm implements MinCut {
 
 	private Grafo grafoCopia;
+	private int random = 0;
 
 	public KargerAlgorithm(Grafo f) {
 		// TODO Auto-generated constructor stub
 		this.grafoCopia = f.copiarGrafo();
+	}
+	
+	public KargerAlgorithm(Grafo f, int random) {
+		this.grafoCopia = f.copiarGrafo();
+		this.random = random;
 	}
 
 	@Override
@@ -28,7 +37,30 @@ public class KargerAlgorithm implements MinCut {
 		// TODO Auto-generated method stub
 
 		Arista aristaActual = null;
-		Random r = new Random();
+		
+		Random r = null;
+		switch(random) {
+			case 0:
+				System.out.println("RANDOM");
+				r = new Random();
+				break;
+			case 1:
+				System.out.println("SECURERANDOM");
+				r = new SecureRandom();
+				break;
+			case 2:
+				System.out.println("HIGHQUALITYRANDOM");
+				r = new HighQualityRandom();
+				break;
+			case 3:
+				System.out.println("XORSHIFTRANDOM");
+				r = new XORShiftRandom();
+				break;
+			default:
+				System.out.println("RANDOM");
+				r = new Random();
+		}
+		
 		while (this.grafoCopia.getVertices().size() > 2) {
 			// arista al azar
 			aristaActual = this.grafoCopia.getAristas().remove(
