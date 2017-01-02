@@ -6,6 +6,7 @@ import java.util.Random;
 
 import practica1.Arista;
 import practica1.Grafo;
+import practica1.Producto;
 import practica1.Vertice;
 import practica1.random.HighQualityRandom;
 import practica1.random.XORShiftRandom;
@@ -41,42 +42,63 @@ public class KargerAlgorithm implements MinCut {
 		Random r = null;
 		switch(random) {
 			case 0:
-				System.out.println("RANDOM");
+				//System.out.println("RANDOM");
 				r = new Random();
 				break;
 			case 1:
-				System.out.println("SECURERANDOM");
+				//System.out.println("SECURERANDOM");
 				r = new SecureRandom();
 				break;
 			case 2:
-				System.out.println("HIGHQUALITYRANDOM");
+				//System.out.println("HIGHQUALITYRANDOM");
 				r = new HighQualityRandom();
 				break;
 			case 3:
-				System.out.println("XORSHIFTRANDOM");
+				//System.out.println("XORSHIFTRANDOM");
 				r = new XORShiftRandom();
 				break;
 			default:
-				System.out.println("RANDOM");
+				//System.out.println("RANDOM");
 				r = new Random();
 		}
 		
 		while (this.grafoCopia.getVertices().size() > 2) {
+			
+			// Se busca una arista con productos con la misma marca
+			Arista tmp = null;
+			for (Arista a : this.grafoCopia.getAristas()) {
+				Producto p1 = this.grafoCopia.getVertices().get(a.getOrigen()).getProducto();
+				Producto p2 = this.grafoCopia.getVertices().get(a.getDestino()).getProducto();
+				if (p1.getMarca().equals(p2.getMarca())) {
+					tmp = a;
+					break;
+				}				
+			}
+			
+			// Si no se encuentra ninguna arista se elige una al azar
+			if (tmp == null) {
+				aristaActual = this.grafoCopia.getAristas().remove(
+						r.nextInt(this.grafoCopia.getAristas().size()));
+				System.out.println("Arista al azar: " + aristaActual.toString());
+			}
+			else {
+				this.grafoCopia.getAristas().remove(tmp);
+				aristaActual = tmp;
+				System.out.println(aristaActual.toString());
+			}
+			
 			// arista al azar
-			aristaActual = this.grafoCopia.getAristas().remove(
-					r.nextInt(this.grafoCopia.getAristas().size()));
-			System.out.println("Arista al azar: " + aristaActual.toString());
+			//aristaActual = this.grafoCopia.getAristas().remove(
+			//		r.nextInt(this.grafoCopia.getAristas().size()));
 			//vertices que contiene la arista
 			//si son los mismos no vale (este caso no deberia darse??)
-			if (aristaActual.getOrigen() == aristaActual.getDestino())
-				continue;
+			//if (aristaActual.getOrigen() == aristaActual.getDestino())
+				//continue;
 
 			unir(aristaActual.getOrigen(), aristaActual.getDestino(), aristaActual);
 			//System.out.println();
 			System.out.println();
 			System.out.println(this.grafoCopia.toString());
-			
-
 		}
 		
 		// Aristas en el corte
@@ -97,7 +119,7 @@ public class KargerAlgorithm implements MinCut {
 		Vertice v2 = this.grafoCopia.getVertices().remove(vertice2);
 		v2.getAristas().remove(arista);
 
-		Vertice unido = new Vertice(v1.getIndice());
+		Vertice unido = new Vertice(v1.getIndice(), v1.getProducto());
         
 		// Redirigir las aristas de v1 al vertice unido
         for (Iterator<Arista> it = v1.getAristas().iterator(); it.hasNext();) {
@@ -142,10 +164,6 @@ public class KargerAlgorithm implements MinCut {
 			//v1.fusionarVertices(v2);
 			//this.grafoCopia.getVertices().put(v1.getIndice(), v1);
 			
-		}
-		
+		}	
 	}
-	
-	
-
 }

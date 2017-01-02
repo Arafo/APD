@@ -7,6 +7,7 @@ import java.util.TreeMap;
 
 import practica1.Arista;
 import practica1.Grafo;
+import practica1.Producto;
 import practica1.Vertice;
 
 public class KargerAlgorithmTest {
@@ -26,11 +27,15 @@ public class KargerAlgorithmTest {
 		/*
 		 * datos del grafo
 		 */
+		Producto p0 = new Producto("", 1, 1, "amazon");
+		Producto p1 = new Producto("", 1, 1, "amazon");
+		Producto p2 = new Producto("", 1, 1, "amazonymas");
+		Producto p3 = new Producto("", 1, 1, "amazonymas");
 		//vertices
-		vertices.put(0, new Vertice(0));
-		vertices.put(1, new Vertice(1));
-		vertices.put(2, new Vertice(2));
-		vertices.put(3, new Vertice(3));
+		vertices.put(0, new Vertice(0, p0));
+		vertices.put(1, new Vertice(1, p1));
+		vertices.put(2, new Vertice(2, p2));
+		vertices.put(3, new Vertice(3, p3));
 		//artistas
 		aristas.add(new Arista(0, 1));
 		aristas.add(new Arista(0, 2));
@@ -38,13 +43,9 @@ public class KargerAlgorithmTest {
 		aristas.add(new Arista(1, 3));
 		aristas.add(new Arista(2, 3));
 		
-		
-		
 		Grafo grafoTest = new Grafo(vertices, aristas);
 		System.out.println(grafoTest.toString());
 		KargerAlgorithm minCut=new KargerAlgorithm(grafoTest);
-		minCut.reducirGrafo();
-		
+		minCut.reducirGrafo();	
 	}
-
 }
