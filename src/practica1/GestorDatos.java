@@ -84,6 +84,7 @@ public class GestorDatos {
         }
         
         Random r = new Random();
+		String[] marcas = new String[]{"amazon", "amazonymas"};
 
         /*
          * Generaci�n de productos
@@ -92,12 +93,14 @@ public class GestorDatos {
         String nombre;
         int unidades;
         double precio;
+        String marca;
         
         for (int i = 0; i < productos; i++) {
         	nombre = "Producto" + i;
             unidades = 1 + r.nextInt(MAX_UNIDADES);
             precio = r.nextDouble() * MAX_PRECIO;
-            pw1.println(nombre + " " + unidades + " " + String.format("%.2f", precio));
+            marca = marcas[r.nextInt(marcas.length)];
+            pw1.println(nombre + " " + unidades + " " + String.format("%.2f", precio) + " " + marca);
         }     
         pw1.flush();
         pw1.close();
@@ -155,7 +158,8 @@ public class GestorDatos {
 		    	StringTokenizer st = new StringTokenizer(line);
 		    	p = new Producto(st.nextToken(), 
 		    			Integer.parseInt(st.nextToken()), 
-		    			Double.parseDouble(st.nextToken()));
+		    			Double.parseDouble(st.nextToken()),
+		    			st.nextToken());
 		    	tabla.put(key, p);
 		    	key++;
 		    	
