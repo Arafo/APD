@@ -13,10 +13,10 @@ public class Main {
 	
 	private final static String FICHERO_PRODUCTOS = "src/practica1/productos.dat";
 	private final static String FICHERO_RELACIONES = "src/practica1/relaciones.dat";
-    private static int repeticiones = 1;
-    private static int numProductos = 40;
-    private static int tipoProductos = 1; // 0 -> booleanos, 1 -> enteros
-    private static String tipoAlgoritmo = "k"; // k -> Karger, ks -> Karger-Stein
+	private static int repeticiones = 1;
+	private static int numProductos = 4;
+	private static int tipoProductos = 0; // 0 -> booleanos, 1 -> enteros
+	private static String tipoAlgoritmo = "k"; // k -> Karger, ks -> Karger-Stein
 	
 	public static void main(String[] args) {
 		

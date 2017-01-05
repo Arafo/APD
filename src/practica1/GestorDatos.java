@@ -115,7 +115,7 @@ public class GestorDatos {
          * Generaci�n de relaciones entre productos
          */
         
-        //boolean conectado = false;
+        boolean conectado = false;
         Object matriz[][] = new Object[productos][productos];
         for (int i = 0; i < productos; i++) {
         	for (int j = 0; j < productos; j++) {
@@ -125,15 +125,17 @@ public class GestorDatos {
         			matriz[i][j] = matriz[j][i];
         		else {
         			matriz[i][j] = !enteros ? r.nextBoolean() : r.nextInt(MAX_JUNTOS);
-        			//conectado &= matriz[i][j];
+        			conectado = !enteros ? conectado || (boolean)matriz[i][j] : conectado || (int)matriz[i][j] != 0;
         		}
         	}
         	// Vertice no conectado con nada
-        	/*if (!conectado) {
-        		int s = (productos - i) + r.nextInt(productos - 1);
-        		System.out.println(s);
-        		matriz[i][s] = true;
-        	}*/
+        	if (!conectado) {
+        		int s = r.nextInt(productos);
+        		while (s == i) s = r.nextInt(productos);
+        		//System.out.println(s);
+        		int valor = 1 + r.nextInt(MAX_JUNTOS);
+        		matriz[i][s] = !enteros ? true : valor;
+        	}
         }
         
     	StringBuilder relacion;
