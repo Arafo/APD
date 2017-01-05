@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import practica1.Arista;
-import practica1.Grafo;
-import practica1.Producto;
-import practica1.Vertice;
+import practica1.grafo.Arista;
+import practica1.grafo.Grafo;
+import practica1.grafo.Producto;
+import practica1.grafo.Vertice;
 
 public class KargerSteinAlgorithmTest {
 	

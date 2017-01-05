@@ -1,4 +1,4 @@
-package practica1;
+package practica1.grafo;
 
 public class Producto {
 	

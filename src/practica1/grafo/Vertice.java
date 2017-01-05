@@ -1,4 +1,4 @@
-package practica1;
+package practica1.grafo;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -50,30 +50,5 @@ public class Vertice {
 
 	public void setProducto(Producto producto) {
 		this.producto = producto;
-	}
-	
-	
-	
-	/*
-	public void fusionarVertices(Vertice v) {
-		
-			for(int i=0;i<v.getAristas().size();i++){
-				Arista aux=v.getAristas().get(i);
-				//si el grafo no conecta los dos vertices 
-				//lo añadimos a las aristas del vertice actual
-				if(!((aux.getOrigen()==this.indice || aux.getDestino() ==this.indice) && 
-						(aux.getOrigen()==v.getIndice() || aux.getDestino() ==v.getIndice()))){
-					
-					
-					if(!this.aristas.contains(aux)){
-						System.out.println("añadiendo...."+aux.toString());
-						aristas.add(aux);
-					}
-				}
-			}
-			//this.verticesInternos.add(v);
-			
-	}
-	*/
-	
+	}	
 }

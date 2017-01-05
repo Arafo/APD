@@ -1,6 +1,6 @@
 package practica1.minCut;
 
-import practica1.Grafo;
+import practica1.grafo.Grafo;
 
 /**
  * Interfaz algoritmos minimun cut sobre grafos

@@ -4,10 +4,10 @@ import java.security.SecureRandom;
 import java.util.Iterator;
 import java.util.Random;
 
-import practica1.Arista;
-import practica1.Grafo;
-import practica1.Producto;
-import practica1.Vertice;
+import practica1.grafo.Arista;
+import practica1.grafo.Grafo;
+import practica1.grafo.Producto;
+import practica1.grafo.Vertice;
 import practica1.random.HighQualityRandom;
 import practica1.random.XORShiftRandom;
 
@@ -15,7 +15,7 @@ import practica1.random.XORShiftRandom;
  * Reference
  * http://research.omicsgroup.org/index.php/Karger's_algorithm#Karger.E2.80.93Stein_algorithm
  * 
- * @author Portátil1
+ * @author Portï¿½til1
  *
  */
 public class KargerSteinAlgortihm implements MinCut {
@@ -24,7 +24,6 @@ public class KargerSteinAlgortihm implements MinCut {
 	private int random = 0;
 
 	public KargerSteinAlgortihm(Grafo f) {
-		// TODO Auto-generated constructor stub
 		this.grafoCopia = f.copiarGrafo();
 	}
 
@@ -36,7 +35,6 @@ public class KargerSteinAlgortihm implements MinCut {
 	@Override
 	public Grafo reducirGrafo() {
 		return this.FastMinCut(this.grafoCopia);
-
 	}
 
 	private Grafo FastMinCut(Grafo g) {
@@ -113,9 +111,6 @@ public class KargerSteinAlgortihm implements MinCut {
 			// aristaActual = this.grafoCopia.getAristas().remove(
 			// r.nextInt(this.grafoCopia.getAristas().size()));
 			// vertices que contiene la arista
-			// si son los mismos no vale (este caso no deberia darse??)
-			// if (aristaActual.getOrigen() == aristaActual.getDestino())
-			// continue;
 
 			unir(g, aristaActual.getOrigen(), aristaActual.getDestino(), aristaActual);
 			// System.out.println();
@@ -131,9 +126,6 @@ public class KargerSteinAlgortihm implements MinCut {
 		return g;
 	}
 
-	/**
-	 * Metodo que une dos aristas del grafo
-	 */
 	/**
 	 * Metodo que une dos aristas del grafo
 	 */

@@ -1,4 +1,4 @@
-package practica1;
+package practica1.grafo;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -32,7 +32,7 @@ public class Grafo {
                 }
             }
 		}
-		this.totalCompras=0;
+		this.totalCompras = 0;
 	}
 	
 	/**
@@ -49,7 +49,7 @@ public class Grafo {
                 Arista a;
                 if (matriz[i][j] > 0 && (a = v2.getAristaA(v1)) == null) {
                     a = new Arista(v1.getIndice(), v2.getIndice(), matriz[i][j]);
-                    this.totalCompras+=matriz[i][j];
+                    this.totalCompras += matriz[i][j];
                     aristas.add(a);
                     v1.addArista(a);
                     v2.addArista(a);
@@ -72,7 +72,7 @@ public class Grafo {
 				}
 			}
 		}
-		this.totalCompras=0;
+		this.totalCompras = 0;
 	}
 	
 	
@@ -93,11 +93,10 @@ public class Grafo {
 		}
 	}
 	
-	
-	
 	public int getTotalCompras() {
 		return this.totalCompras;
 	}
+	
 	public Vertice getVertice(int indice, Hashtable<Integer, Producto> productos) {
         Vertice v;
         if ((v = vertices.get(indice)) == null) {
@@ -123,7 +122,7 @@ public class Grafo {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for (Vertice v1 : vertices.values()) {
-			sb.append(v1.getIndice() + " (" + /*v1.getProducto().getNombre() +*/ "): ");
+			sb.append(v1.getIndice() + " (" + v1.getProducto().getMarca() + "): ");
 			for (Vertice v2 : vertices.values()) {
 				if (v1.getIndice() != v2.getIndice() && v2.getAristaA(v1) != null) {
 					sb.append(" " + v2.getIndice());

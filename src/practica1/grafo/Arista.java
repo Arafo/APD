@@ -1,17 +1,12 @@
-package practica1;
-
-import java.util.ArrayList;
-import java.util.List;
+package practica1.grafo;
 
 public class Arista {
 	
 	private int origen;
 	private int destino;
-	private int juntos;
+	private int juntos = -1;
 	private String conexionOriginal;
-	
-	//private final List<Vertice> vertices = new ArrayList<Vertice>();
-	
+		
 	public Arista(int origen, int destino) {
 		super();
 		this.origen = origen;
@@ -26,15 +21,6 @@ public class Arista {
 		this.juntos = juntos;
 		this.conexionOriginal = origen + "-" + destino;
 	}
-	
-	/*public Arista(Vertice origen, Vertice destino) {
-		vertices.add(origen);
-		vertices.add(destino);
-	}
-
-	public boolean contiene(Vertice v1, Vertice v2 ) {
-		return vertices.contains(v1) && vertices.contains(v2);	
-	}*/
 	
 	public boolean contiene(int v1, int v2) {
 		return (origen == v1 && destino == v2) || (origen == v2 && destino == v1);	
@@ -57,10 +43,6 @@ public class Arista {
 			return destino;
 		return origen;
 	}
-	
-	/*public List<Vertice> getVertices() {
-		return vertices;
-	}*/
 
 	public int getOrigen() {
 		return origen;
@@ -88,7 +70,6 @@ public class Arista {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return "Arista: " + this.origen + "-" + this.destino;
+		return "Arista: " + this.origen + " - " + this.destino;
 	}
 }

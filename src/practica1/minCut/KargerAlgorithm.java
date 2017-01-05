@@ -4,10 +4,10 @@ import java.security.SecureRandom;
 import java.util.Iterator;
 import java.util.Random;
 
-import practica1.Arista;
-import practica1.Grafo;
-import practica1.Producto;
-import practica1.Vertice;
+import practica1.grafo.Arista;
+import practica1.grafo.Grafo;
+import practica1.grafo.Producto;
+import practica1.grafo.Vertice;
 import practica1.random.HighQualityRandom;
 import practica1.random.XORShiftRandom;
 
@@ -97,9 +97,6 @@ public class KargerAlgorithm implements MinCut {
 			// aristaActual = this.grafoCopia.getAristas().remove(
 			// r.nextInt(this.grafoCopia.getAristas().size()));
 			// vertices que contiene la arista
-			// si son los mismos no vale (este caso no deberia darse??)
-			// if (aristaActual.getOrigen() == aristaActual.getDestino())
-			// continue;
 
 			unir(aristaActual.getOrigen(), aristaActual.getDestino(), aristaActual);
 			// System.out.println();

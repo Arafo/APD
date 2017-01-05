@@ -11,6 +11,8 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.StringTokenizer;
 
+import practica1.grafo.Grafo;
+import practica1.grafo.Producto;
 import practica1.minCut.KargerAlgorithm;
 import practica1.minCut.KargerSteinAlgortihm;
 import practica1.minCut.MinCut;
