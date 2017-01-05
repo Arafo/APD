@@ -10,6 +10,7 @@ public class Grafo {
 	
 	private Map<Integer, Vertice> vertices = new TreeMap<Integer, Vertice>();
 	private List<Arista> aristas = new ArrayList<Arista>();
+	private int totalCompras;
 	
 	/**
 	 * 
@@ -31,6 +32,7 @@ public class Grafo {
                 }
             }
 		}
+		this.totalCompras=0;
 	}
 	
 	/**
@@ -47,6 +49,7 @@ public class Grafo {
                 Arista a;
                 if (matriz[i][j] > 0 && (a = v2.getAristaA(v1)) == null) {
                     a = new Arista(v1.getIndice(), v2.getIndice(), matriz[i][j]);
+                    this.totalCompras+=matriz[i][j];
                     aristas.add(a);
                     v1.addArista(a);
                     v2.addArista(a);
@@ -69,8 +72,32 @@ public class Grafo {
 				}
 			}
 		}
+		this.totalCompras=0;
 	}
 	
+	
+	public Grafo(Map<Integer, Vertice> vertices, List<Arista> aristas,int totalCompras) {
+		// TODO Auto-generated constructor stub
+		this.totalCompras=totalCompras;
+		this.vertices =  new TreeMap<Integer, Vertice>(vertices);
+		this.aristas = new ArrayList<Arista>(aristas);
+		for (Vertice v0 : this.vertices.values()) {
+			for (Vertice v1 : this.vertices.values()) {
+				for (Arista a : this.aristas) {
+					if (a.contiene(v0.getIndice(), v1.getIndice())) {
+						v0.addArista(a);
+	                    v1.addArista(a);
+					}
+				}
+			}
+		}
+	}
+	
+	
+	
+	public int getTotalCompras() {
+		return this.totalCompras;
+	}
 	public Vertice getVertice(int indice, Hashtable<Integer, Producto> productos) {
         Vertice v;
         if ((v = vertices.get(indice)) == null) {
@@ -89,7 +116,7 @@ public class Grafo {
 	}
 	
 	public Grafo copiarGrafo(){
-		return new Grafo(this.vertices, this.aristas);
+		return new Grafo(this.vertices, this.aristas,this.totalCompras);
 	}
 	
 	@Override

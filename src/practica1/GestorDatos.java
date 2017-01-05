@@ -11,6 +11,10 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.StringTokenizer;
 
+import practica1.minCut.KargerAlgorithm;
+import practica1.minCut.KargerSteinAlgortihm;
+import practica1.minCut.MinCut;
+
 public class GestorDatos {
 	
 	private final static String FICHERO_PRODUCTOS = "src/practica1/productos.dat";
@@ -254,6 +258,9 @@ public class GestorDatos {
 		int matrizEnteros[][] = gd.obtenerRelacionesEnteros();
 		Grafo g = new Grafo(matrizEnteros, productos);
 		System.out.println(g.toString());
+		
+		MinCut krager= new KargerSteinAlgortihm(g);
+		krager.reducirGrafo();
 		//System.out.println(g.AdjString(matriz));
 	}
 }

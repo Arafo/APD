@@ -86,7 +86,9 @@ public class KargerSteinAlgortihm implements MinCut {
 			// Se busca una arista con productos con la misma marca
 			Arista tmp = null;
 			for (Arista a : this.grafoCopia.getAristas()) {
-				if (r.nextFloat() <= (100.0f / a.getJuntos())) {
+				float probability = (a.getJuntos() == 0) ? 100.0f
+						: a.getJuntos() * 100.0f / this.grafoCopia.getTotalCompras();
+				if (r.nextFloat() * 100.0f <= (100.0f - probability)) {
 					Producto p1 = this.grafoCopia.getVertices().get(a.getOrigen()).getProducto();
 					Producto p2 = this.grafoCopia.getVertices().get(a.getDestino()).getProducto();
 
@@ -115,7 +117,7 @@ public class KargerSteinAlgortihm implements MinCut {
 			// if (aristaActual.getOrigen() == aristaActual.getDestino())
 			// continue;
 
-			unir(g,aristaActual.getOrigen(), aristaActual.getDestino(), aristaActual);
+			unir(g, aristaActual.getOrigen(), aristaActual.getDestino(), aristaActual);
 			// System.out.println();
 			System.out.println();
 			System.out.println(g.toString());
