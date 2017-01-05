@@ -15,26 +15,37 @@ import practica1.random.XORShiftRandom;
  * Reference
  * http://research.omicsgroup.org/index.php/Karger's_algorithm#Karger.E2.80.93Stein_algorithm
  * 
- * @author Portï¿½til1
+ * @author Portátil1
  *
  */
 public class KargerSteinAlgortihm implements MinCut {
 
 	private Grafo grafoCopia;
 	private int random = 0;
+	private boolean usarProbabilidad = false;
 
 	public KargerSteinAlgortihm(Grafo f) {
+		// TODO Auto-generated constructor stub
 		this.grafoCopia = f.copiarGrafo();
 	}
 
 	public KargerSteinAlgortihm(Grafo f, int random) {
+		this(f, random, false);
+	}
+
+	public KargerSteinAlgortihm(Grafo f, boolean usarprobabilidad) {
+		this(f, 0, usarprobabilidad);
+	}
+	public KargerSteinAlgortihm(Grafo f, int random, boolean usarProbabilidad) {
 		this.grafoCopia = f.copiarGrafo();
 		this.random = random;
+		this.usarProbabilidad = usarProbabilidad;
 	}
 
 	@Override
 	public Grafo reducirGrafo() {
 		return this.FastMinCut(this.grafoCopia);
+
 	}
 
 	private Grafo FastMinCut(Grafo g) {
@@ -84,24 +95,36 @@ public class KargerSteinAlgortihm implements MinCut {
 			// Se busca una arista con productos con la misma marca
 			Arista tmp = null;
 			for (Arista a : this.grafoCopia.getAristas()) {
-				float probability = (a.getJuntos() == 0) ? 100.0f
-						: a.getJuntos() * 100.0f / this.grafoCopia.getTotalCompras();
-				if (r.nextFloat() * 100.0f <= (100.0f - probability)) {
-					Producto p1 = this.grafoCopia.getVertices().get(a.getOrigen()).getProducto();
-					Producto p2 = this.grafoCopia.getVertices().get(a.getDestino()).getProducto();
+				Producto p1 = this.grafoCopia.getVertices().get(a.getOrigen()).getProducto();
+				Producto p2 = this.grafoCopia.getVertices().get(a.getDestino()).getProducto();
 
-					if (p1.getMarca().equals(p2.getMarca())) {
-						tmp = a;
-						break;
-					}
+				if (p1.getMarca().equals(p2.getMarca())) {
+					tmp = a;
+					break;
 				}
 			}
 
 			// Si no se encuentra ninguna arista se elige una al azar
+
+			// }
 			if (tmp == null) {
-				aristaActual = g.getAristas().remove(r.nextInt(g.getAristas().size()));
+				// Apartado 6
+				if (this.usarProbabilidad) {
+					for (Arista a : this.grafoCopia.getAristas()) {
+						float probability = (a.getJuntos() == 0) ? 100.0f
+								: a.getJuntos() * 100.0f / this.grafoCopia.getTotalCompras();
+						if (!usarProbabilidad || r.nextFloat() * 100.0f <= (100.0f - probability)) {
+							aristaActual = g.getAristas().remove(g.getAristas().indexOf(a));
+							break;
+						}
+					}
+				} else {
+					aristaActual = g.getAristas().remove(r.nextInt(g.getAristas().size()));
+				}
 				System.out.println("Arista al azar: " + aristaActual.toString());
-			} else {
+			}
+
+			else {
 				g.getAristas().remove(tmp);
 				aristaActual = tmp;
 				System.out.println(aristaActual.toString());
@@ -111,6 +134,9 @@ public class KargerSteinAlgortihm implements MinCut {
 			// aristaActual = this.grafoCopia.getAristas().remove(
 			// r.nextInt(this.grafoCopia.getAristas().size()));
 			// vertices que contiene la arista
+			// si son los mismos no vale (este caso no deberia darse??)
+			// if (aristaActual.getOrigen() == aristaActual.getDestino())
+			// continue;
 
 			unir(g, aristaActual.getOrigen(), aristaActual.getDestino(), aristaActual);
 			// System.out.println();
@@ -126,6 +152,9 @@ public class KargerSteinAlgortihm implements MinCut {
 		return g;
 	}
 
+	/**
+	 * Metodo que une dos aristas del grafo
+	 */
 	/**
 	 * Metodo que une dos aristas del grafo
 	 */

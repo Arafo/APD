@@ -21,16 +21,27 @@ import practica1.random.XORShiftRandom;
 public class KargerAlgorithm implements MinCut {
 
 	private Grafo grafoCopia;
-	private int random = 0;
+	private int random;
+	private boolean usarProbabilidad; // flag para el apartado 6
 
 	public KargerAlgorithm(Grafo f) {
 		// TODO Auto-generated constructor stub
-		this.grafoCopia = f.copiarGrafo();
+		this(f, 0, false);
+	}
+
+	public KargerAlgorithm(Grafo f, boolean usarProbabilidad) {
+		// TODO Auto-generated constructor stub
+		this(f, 0, usarProbabilidad);
 	}
 
 	public KargerAlgorithm(Grafo f, int random) {
+		this(f, random, false);
+	}
+
+	public KargerAlgorithm(Grafo f, int random, boolean usarProbabilidad) {
 		this.grafoCopia = f.copiarGrafo();
 		this.random = random;
+		this.usarProbabilidad = true;
 	}
 
 	@Override
@@ -67,9 +78,6 @@ public class KargerAlgorithm implements MinCut {
 			// Se busca una arista con productos con la misma marca
 			Arista tmp = null;
 			for (Arista a : this.grafoCopia.getAristas()) {
-				
-				float probability = (a.getJuntos() == 0) ? 100.0f : a.getJuntos()*100.0f/this.grafoCopia.getTotalCompras() ;
-				if (r.nextFloat()*100.0f <= (100.0f-probability)) {
 					Producto p1 = this.grafoCopia.getVertices().get(a.getOrigen()).getProducto();
 					Producto p2 = this.grafoCopia.getVertices().get(a.getDestino()).getProducto();
 
@@ -77,15 +85,22 @@ public class KargerAlgorithm implements MinCut {
 						tmp = a;
 						break;
 					}
-				}
 			}
 
 			// Si no se encuentra ninguna arista se elige una al azar
 			if (tmp == null) {
-				/**
-				 * Elegir una arista segun su valor junto inverso
-				 */
-				aristaActual = this.grafoCopia.getAristas().remove(r.nextInt(this.grafoCopia.getAristas().size()));
+				if (this.usarProbabilidad) {
+					for (Arista a : this.grafoCopia.getAristas()) {
+						float probability = (a.getJuntos() == 0) ? 100.0f
+								: a.getJuntos() * 100.0f / this.grafoCopia.getTotalCompras();
+						if (!usarProbabilidad || r.nextFloat() * 100.0f <= (100.0f - probability)) {
+							aristaActual = this.grafoCopia.getAristas().remove(this.grafoCopia.getAristas().indexOf(a));
+							break;
+						}
+					}
+				} else {
+					aristaActual = this.grafoCopia.getAristas().remove(r.nextInt(this.grafoCopia.getAristas().size()));
+				}
 				System.out.println("Arista al azar: " + aristaActual.toString());
 			} else {
 				this.grafoCopia.getAristas().remove(tmp);
