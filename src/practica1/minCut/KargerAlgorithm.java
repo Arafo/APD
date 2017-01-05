@@ -21,16 +21,27 @@ import practica1.random.XORShiftRandom;
 public class KargerAlgorithm implements MinCut {
 
 	private Grafo grafoCopia;
-	private int random = 0;
+	private int random;
+	private boolean usarProbabilidad; //flag para el apartado 6
 
 	public KargerAlgorithm(Grafo f) {
 		// TODO Auto-generated constructor stub
-		this.grafoCopia = f.copiarGrafo();
+		this(f, 0, false);
+	}
+	
+	public KargerAlgorithm(Grafo f,boolean usarProbabilidad) {
+		// TODO Auto-generated constructor stub
+		this(f, 0, usarProbabilidad);
 	}
 
 	public KargerAlgorithm(Grafo f, int random) {
+		this(f,random,false);
+	}
+	
+	public KargerAlgorithm(Grafo f, int random,boolean usarProbabilidad) {
 		this.grafoCopia = f.copiarGrafo();
 		this.random = random;
+		this.usarProbabilidad=true;
 	}
 
 	@Override
@@ -69,7 +80,7 @@ public class KargerAlgorithm implements MinCut {
 			for (Arista a : this.grafoCopia.getAristas()) {
 				
 				float probability = (a.getJuntos() == 0) ? 100.0f : a.getJuntos()*100.0f/this.grafoCopia.getTotalCompras() ;
-				if (r.nextFloat()*100.0f <= (100.0f-probability)) {
+				if (!this.usarProbabilidad || r.nextFloat()*100.0f <= (100.0f-probability)) {
 					Producto p1 = this.grafoCopia.getVertices().get(a.getOrigen()).getProducto();
 					Producto p2 = this.grafoCopia.getVertices().get(a.getDestino()).getProducto();
 
