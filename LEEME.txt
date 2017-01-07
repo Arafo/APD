@@ -1,31 +1,37 @@
-MarcŽn Altarriba, Rafael	650435@unizar.es	a650435
+Marcén Altarriba, Rafael	650435@unizar.es	a650435
 Caudevilla Casasœs, Jose Angel	649003@unizar.es	a649003
 
 #################################
-# ORGANIZACIîN
+# ORGANIZACIÓN
 #################################
 
 
 #################################
 # REALIZACION DE PRUEBAS
 #################################
-Para la realizaci—n de la pruebas se ha creado el script 'ejecutarX.sh'. Dicho script realiza la ejecuci—n de los distintos pruebas de formal secuencial. La forma de ejecutar el script es la siguiente:
+Para la realización de la pruebas se ha creado el script 'ejecutarX.sh'. Dicho script realiza la ejecución de los distintos pruebas de formal secuencial. La forma de ejecutar el script es la siguiente:
 	./ejecutarX
 
 En este script se realizan  todos los tipos de pruebas posibles:
-- 10 repeticiones del algoritmo de Karger con una matriz 10x10 de booleanos.
-- 10 repeticiones del algoritmo de Karger con una matriz 10x10 de enteros.
-- 10 repeticiones del algoritmo de Karger-Stein con una matriz 10x10 de booleanos.
-- 10 repeticiones del algoritmo de Karger-Stein con una matriz 10x10 de enteros.
-- 10 repeticiones del algoritmo de Karger con una matriz 100x100 de booleanos.
-- 10 repeticiones del algoritmo de Karger con una matriz 100x100 de enteros.
-- 10 repeticiones del algoritmo de Karger-Stein con una matriz 100x100 de booleanos.
-- 10 repeticiones del algoritmo de Karger-Stein con una matriz 100x100 de enteros.
+- 10 repeticiones del algoritmo de Karger con el generador Random y con una matriz 10x10 de booleanos.
+- 10 repeticiones del algoritmo de Karger con el generador SecureRandom y con una matriz 10x10 de booleanos.
+- 10 repeticiones del algoritmo de Karger con el generador HighQualityRandom y con una matriz 10x10 de booleanos.
+- 10 repeticiones del algoritmo de Karger con el generador XORShiftRandom y con una matriz 10x10 de booleanos.
 
-Si se desea, tambiŽn se puede realizar la realizaci—n de las pruebasusando directamente el fichero java mediante la ejecuci—n de:
-	java -cp bin practica1.Main -p <productos> -t <tipo> -r <repeticiones> -a <algoritmo>
+- 10 repeticiones del algoritmo de Karger-Stein con el generador Random y con una matriz 10x10 de booleanos.
+- 10 repeticiones del algoritmo de Karger-Stein con el generador SecureRandom y con una matriz 10x10 de booleanos.
+- 10 repeticiones del algoritmo de Karger-Stein con el generador HighQualityRandom y con una matriz 10x10 de booleanos.
+- 10 repeticiones del algoritmo de Karger-Stein con el generador XORShiftRandom y con una matriz 10x10 de booleanos.
+
+- 10 repeticiones del algoritmo de Karger con el generador Random y con una matriz 10x10 de enteros.
+- 10 repeticiones del algoritmo de Karger con el generador SecureRandom y con una matriz 10x10 de enteros.
+- 10 repeticiones del algoritmo de Karger con el generador HighQualityRandom y con una matriz 10x10 de enteros.
+- 10 repeticiones del algoritmo de Karger con el generador XORShiftRandom y con una matriz 10x10 de enteros.
+
+Si se desea, también se puede realizar la realización de las pruebasusando directamente el fichero java mediante la ejecución de:
+	java -cp bin practica1.Main -p <productos> -t <tipo> -r <repeticiones> -a <algoritmo> -n <random> -u <probabilidad> fm <ficheroMatriz> -fp <ficheroProductos> -d <debug>
  
-Donde productos es la cantidad de productos que contiene el grafo, tipo es el tipo de datos de la matriz (0 booleanos y 1 enteros), repeticiones es el nœmero de repeticiones del algoritmo y algoritmo es el tipo de algoritmo (k Karger y ks Karger-Stein)
+Donde productos es la cantidad de productos que contiene el grafo, tipo es el tipo de datos de la matriz (0 booleanos y 1 enteros), repeticiones es el número de repeticiones del algoritmo y algoritmo es el tipo de algoritmo (k Karger y ks Karger-Stein), random el tipo de generador aleatorio, probabilidad es el apartado 6 de la práctica, ficheroMatriz el fichero que representa una matriz, ficheroProductos es el fichero de productos y debug es una flag para mostrar m‡s informaci—n por pantalla.
 
 #################################
 # NOTAS ADICCIONALES

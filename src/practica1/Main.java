@@ -23,10 +23,10 @@ public class Main {
 	private final static String FICHERO_PRODUCTOS = "src/practica1/productos.dat";
 	private final static String FICHERO_RELACIONES = "src/practica1/relaciones.dat";
 	private static int repeticiones = 10;
-	private static int numProductos = 40;
+	private static int numProductos = 10;
 	private static int tipoProductos = 0; // 0 -> booleanos, 1 -> enteros
 	private static String tipoAlgoritmo = "k"; // k -> Karger, ks -> Karger-Stein
-	private static int random = 3; // 0 -> random, 1 -> SecureRandom, 2 -> HighQualityRandom, 3 -> XORShiftRandom
+	private static int random = 0; // 0 -> random, 1 -> SecureRandom, 2 -> HighQualityRandom, 3 -> XORShiftRandom
 	private static int usarProbabilidad = 0; // Flag para el apartado 6: 0 -> No, 1 -> Si
 	private static int debug = 1;
 	private static String ficheroMatriz = "src/practica1/relaciones.dat";
