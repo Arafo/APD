@@ -1,6 +1,11 @@
 #!/bin/bash
 
 #CLASSPATH="./"
+
+if [ ! -d bin ]; then
+	mkdir -p bin;
+fi
+
 echo "Compilación"
 javac -d bin -sourcepath src -cp src/practica1/*.java src/practica1/minCut/*.java src/practica1/random/*.java
 
