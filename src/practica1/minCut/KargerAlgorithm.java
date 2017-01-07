@@ -1,3 +1,12 @@
+/**
+* Implementacion del algoritmo de Karger
+* http://www.geeksforgeeks.org/kargers-algorithm-for-minimum-cut-set-1-introduction-and-implementation/ 
+* @author  Rafael Marcen Altarriba (650435)
+* @author  Jose Angel Caudevilla Casasus (649003)
+* @version 1.0
+* @since   07-01-2017
+*/
+
 package practica1.minCut;
 
 import java.security.SecureRandom;
@@ -11,43 +20,54 @@ import practica1.grafo.Vertice;
 import practica1.random.HighQualityRandom;
 import practica1.random.XORShiftRandom;
 
-/**
- * Referencia:
- * http://www.geeksforgeeks.org/kargers-algorithm-for-minimum-cut-set-1-introduction-and-implementation/
- * 
- * @author Port�til1
- *
- */
 public class KargerAlgorithm implements MinCut {
-
+	
 	private Grafo grafoCopia;
 	private int random;
 	private boolean usarProbabilidad; // flag para el apartado 6
+	private boolean debug = false;
 
-	public KargerAlgorithm(Grafo f) {
-		// TODO Auto-generated constructor stub
-		this(f, 0, false);
+	/**
+	 * Constructor
+	 * @param f
+	 */
+	public KargerAlgorithm(Grafo g) {
+		this(g, 0, false);
 	}
 
-	public KargerAlgorithm(Grafo f, boolean usarProbabilidad) {
-		// TODO Auto-generated constructor stub
-		this(f, 0, usarProbabilidad);
+	/**
+	 * Constructor
+	 * @param g
+	 * @param usarProbabilidad
+	 */
+	public KargerAlgorithm(Grafo g, boolean usarProbabilidad) {
+		this(g, 0, usarProbabilidad);
 	}
 
-	public KargerAlgorithm(Grafo f, int random) {
-		this(f, random, false);
+	/**
+	 * Constructor
+	 * @param g
+	 * @param random
+	 */
+	public KargerAlgorithm(Grafo g, int random) {
+		this(g, random, false);
 	}
-
-	public KargerAlgorithm(Grafo f, int random, boolean usarProbabilidad) {
-		this.grafoCopia = f.copiarGrafo();
+	
+	/**
+	 * Constructor
+	 * @param g
+	 * @param random
+	 * @param usarProbabilidad
+	 */
+	public KargerAlgorithm(Grafo g, int random, boolean usarProbabilidad) {
+		this.grafoCopia = g.copiarGrafo();
 		this.random = random;
-		this.usarProbabilidad = true;
+		this.usarProbabilidad = usarProbabilidad;
 	}
 
 	@Override
 	public Grafo reducirGrafo() {
-		// TODO Auto-generated method stub
-
+		
 		Arista aristaActual = null;
 
 		Random r = null;
@@ -77,7 +97,7 @@ public class KargerAlgorithm implements MinCut {
 
 			// Se busca una arista con productos con la misma marca
 			Arista tmp = null;
-			for (Arista a : this.grafoCopia.getAristas()) {
+			/*for (Arista a : this.grafoCopia.getAristas()) {
 					Producto p1 = this.grafoCopia.getVertices().get(a.getOrigen()).getProducto();
 					Producto p2 = this.grafoCopia.getVertices().get(a.getDestino()).getProducto();
 
@@ -85,7 +105,7 @@ public class KargerAlgorithm implements MinCut {
 						tmp = a;
 						break;
 					}
-			}
+			}*/
 
 			// Si no se encuentra ninguna arista se elige una al azar
 			if (tmp == null) {
@@ -100,35 +120,39 @@ public class KargerAlgorithm implements MinCut {
 					}
 				} else {
 					aristaActual = this.grafoCopia.getAristas().remove(r.nextInt(this.grafoCopia.getAristas().size()));
-				}
-				System.out.println("Arista al azar: " + aristaActual.toString());
+					if (debug)
+						System.out.println("Arista al azar: " + aristaActual.toString());
+				}	
 			} else {
 				this.grafoCopia.getAristas().remove(tmp);
 				aristaActual = tmp;
-				System.out.println(aristaActual.toString());
+				if (debug)
+					System.out.println(aristaActual.toString());
 			}
 
-			// arista al azar
-			// aristaActual = this.grafoCopia.getAristas().remove(
-			// r.nextInt(this.grafoCopia.getAristas().size()));
-			// vertices que contiene la arista
-
 			unir(aristaActual.getOrigen(), aristaActual.getDestino(), aristaActual);
-			// System.out.println();
-			System.out.println();
-			System.out.println(this.grafoCopia.toString());
+			if (debug) {
+				// System.out.println();
+				System.out.println();
+				System.out.println(this.grafoCopia.toString());
+			}
 		}
 
 		// Aristas en el corte
-		System.out.println("MINCUT: " + this.grafoCopia.getAristas().size());
-		for (Arista a : this.grafoCopia.getAristas())
-			System.out.println("Arista " + a.getConexionOriginal());
-
+		if (debug) {
+			System.out.println("MINCUT: " + this.grafoCopia.getAristas().size());
+			for (Arista a : this.grafoCopia.getAristas())
+				System.out.println("Arista " + a.getConexionOriginal());
+		}
+		
 		return this.grafoCopia;
 	}
 
 	/**
 	 * Metodo que une dos aristas del grafo
+	 * @param vertice1
+	 * @param vertice2
+	 * @param arista
 	 */
 	private void unir(int vertice1, int vertice2, Arista arista) {
 		// vertices a partir arista
@@ -170,15 +194,5 @@ public class KargerAlgorithm implements MinCut {
 		}
 
 		this.grafoCopia.getVertices().put(unido.getIndice(), unido);
-
-		if (v1.getAristas().size() <= v2.getAristas().size()) {
-
-			// v2.fusionarVertices(v1);
-			// this.grafoCopia.getVertices().put(v2.getIndice(), v2);
-		} else {
-			// v1.fusionarVertices(v2);
-			// this.grafoCopia.getVertices().put(v1.getIndice(), v1);
-
-		}
 	}
 }

@@ -1,3 +1,13 @@
+/**
+* La clase Grafo representa un grafo mediante
+* sus vertices y sus aristas
+*
+* @author  Rafael Marcen Altarriba (650435)
+* @author  Jose Angel Caudevilla Casasus (649003)
+* @version 1.0
+* @since   07-01-2017
+*/
+
 package practica1.grafo;
 
 import java.util.ArrayList;
@@ -13,7 +23,7 @@ public class Grafo {
 	private int totalCompras;
 	
 	/**
-	 * 
+	 * Constructor
 	 * @param matriz
 	 * @param productos
 	 */
@@ -36,7 +46,7 @@ public class Grafo {
 	}
 	
 	/**
-	 * 
+	 * Constructor
 	 * @param matriz
 	 * @param productos
 	 */
@@ -58,6 +68,11 @@ public class Grafo {
 		}
 	}
 	
+	/**
+	 * Constructor
+	 * @param vertices
+	 * @param aristas
+	 */
 	public Grafo(Map<Integer, Vertice> vertices, List<Arista> aristas) {
 		// TODO Auto-generated constructor stub
 		this.vertices =  new TreeMap<Integer, Vertice>(vertices);
@@ -75,9 +90,13 @@ public class Grafo {
 		this.totalCompras = 0;
 	}
 	
-	
+	/**
+	 * Constructor
+	 * @param vertices
+	 * @param aristas
+	 * @param totalCompras
+	 */
 	public Grafo(Map<Integer, Vertice> vertices, List<Arista> aristas,int totalCompras) {
-		// TODO Auto-generated constructor stub
 		this.totalCompras=totalCompras;
 		this.vertices =  new TreeMap<Integer, Vertice>(vertices);
 		this.aristas = new ArrayList<Arista>(aristas);
@@ -93,10 +112,22 @@ public class Grafo {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getTotalCompras() {
 		return this.totalCompras;
 	}
 	
+	/**
+	 * Devuelve el vertice cuyo indice es indice <indice>.
+	 * Si dicho vertice no existe en el grafo, lo añade y lo
+	 * devuelve
+	 * @param indice
+	 * @param productos
+	 * @return
+	 */
 	public Vertice getVertice(int indice, Hashtable<Integer, Producto> productos) {
         Vertice v;
         if ((v = vertices.get(indice)) == null) {
@@ -106,15 +137,27 @@ public class Grafo {
         return v;    
 	}
 	
+	/**
+	 * Devuelve la lista de arista del grafo
+	 * @return
+	 */
 	public List<Arista> getAristas() {
 		return this.aristas;
 	}
 	
+	/**
+	 * Devuelve la lista de vertices del grafo
+	 * @return
+	 */
 	public Map<Integer, Vertice> getVertices() {
 		return this.vertices;
 	}
 	
-	public Grafo copiarGrafo(){
+	/**
+	 * Devuelve una copia del grafo
+	 * @return
+	 */
+	public Grafo copiarGrafo() {
 		return new Grafo(this.vertices, this.aristas,this.totalCompras);
 	}
 	
@@ -133,6 +176,13 @@ public class Grafo {
 		return sb.toString();
 	}
 	
+	/**
+	 * Devuelve una cadena correspondiente a la matriz
+	 * de adyacencias del grafo representado por el array
+	 * de booleanos <matriz>
+	 * @param matriz
+	 * @return
+	 */
 	public String AdjString(boolean[][] matriz) {
 		StringBuilder sb = new StringBuilder();
 		

@@ -1,3 +1,13 @@
+/**
+* La clase GestorDatos se ocupa de generar y leer ficheros 
+* de productos y de grafos.
+*
+* @author  Rafael Marcen Altarriba (650435)
+* @author  Jose Angel Caudevilla Casasus (649003)
+* @version 1.0
+* @since   07-01-2017
+*/
+
 package practica1;
 
 import java.io.BufferedReader;
@@ -7,20 +17,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Hashtable;
-import java.util.Locale;
 import java.util.Random;
 import java.util.StringTokenizer;
 
-import practica1.grafo.Grafo;
 import practica1.grafo.Producto;
-import practica1.minCut.KargerAlgorithm;
-import practica1.minCut.KargerSteinAlgortihm;
-import practica1.minCut.MinCut;
 
 public class GestorDatos {
 	
-	private final static String FICHERO_PRODUCTOS = "src/practica1/productos.dat";
-	private final static String FICHERO_RELACIONES = "src/practica1/relaciones.dat";
+	private String FICHERO_PRODUCTOS = "src/practica1/productos.dat";
+	private String FICHERO_RELACIONES = "src/practica1/relaciones.dat";
 	
 	// Cosas del producto
 	private final int MAX_UNIDADES = 1000;
@@ -62,7 +67,20 @@ public class GestorDatos {
 	}
 	
 	/**
-	 * 
+	 * Constructor
+	 * @param productos
+	 * @param ficheroRelaciones
+	 * @param ficheroProductos
+	 */
+	public GestorDatos(int productos, String ficheroRelaciones, String ficheroProductos) {
+		this.productos = productos;
+		this.FICHERO_PRODUCTOS = ficheroProductos;
+		this.FICHERO_RELACIONES = ficheroRelaciones;
+	}
+	
+	/**
+	 * Genera los datos de productos y las conexiones del grafo en los ficheros
+	 * <ficheroProdcutos> y <ficheroRelaciones>
 	 * @param ficheroProductos
 	 * @param ficheroRelaciones
 	 */
@@ -149,7 +167,8 @@ public class GestorDatos {
 	}
 	
 	/**
-	 * 
+	 * Devuelve una tabla con los productos almacenados en el fichero 
+	 * <FICHERO_PRODUCTOS>
 	 * @return
 	 */
 	public Hashtable<Integer, Producto> obtenerProductos() {
@@ -182,7 +201,8 @@ public class GestorDatos {
 	}
 	
 	/**
-	 * 
+	 * Devuelve una tabla de booleanos con las conexiones del grafo almacenadass en
+	 * el fichero <FICHERO_RELACIONES>
 	 * @return
 	 */
 	public boolean[][] obtenerRelaciones() {
@@ -215,7 +235,8 @@ public class GestorDatos {
 	}
 	
 	/**
-	 * 
+	 * Devuelve una tabla de enteros con las conexiones del grafo almacenadass en
+	 * el fichero <FICHERO_RELACIONES>
 	 * @return
 	 */
 	public int[][] obtenerRelacionesEnteros() {
@@ -243,26 +264,5 @@ public class GestorDatos {
 		}
 		
 		return relaciones;
-	}
-	
-	/**
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// Para que las comas sean puntos
-		Locale.setDefault(new Locale("en", "UK"));
-		
-		GestorDatos gd = new GestorDatos(4, true, true);
-		gd.generarDatos(FICHERO_PRODUCTOS, FICHERO_RELACIONES);
-		Hashtable<Integer, Producto> productos = gd.obtenerProductos();
-		boolean matriz[][] = gd.obtenerRelaciones();
-		int matrizEnteros[][] = gd.obtenerRelacionesEnteros();
-		Grafo g = new Grafo(matrizEnteros, productos);
-		System.out.println(g.toString());
-		
-		MinCut krager= new KargerAlgorithm(g);
-		krager.reducirGrafo();
-		//System.out.println(g.AdjString(matriz));
 	}
 }

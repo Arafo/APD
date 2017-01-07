@@ -1,3 +1,12 @@
+/**
+* Clase principal
+* 
+* @author  Rafael Marcen Altarriba (650435)
+* @author  Jose Angel Caudevilla Casasus (649003)
+* @version 1.0
+* @since   07-01-2017
+*/
+
 package practica1;
 
 import java.util.Hashtable;
@@ -13,10 +22,15 @@ public class Main {
 	
 	private final static String FICHERO_PRODUCTOS = "src/practica1/productos.dat";
 	private final static String FICHERO_RELACIONES = "src/practica1/relaciones.dat";
-	private static int repeticiones = 1;
-	private static int numProductos = 4;
+	private static int repeticiones = 10;
+	private static int numProductos = 40;
 	private static int tipoProductos = 0; // 0 -> booleanos, 1 -> enteros
 	private static String tipoAlgoritmo = "k"; // k -> Karger, ks -> Karger-Stein
+	private static int random = 3; // 0 -> random, 1 -> SecureRandom, 2 -> HighQualityRandom, 3 -> XORShiftRandom
+	private static int usarProbabilidad = 0; // Flag para el apartado 6: 0 -> No, 1 -> Si
+	private static int debug = 1;
+	private static String ficheroMatriz = "src/practica1/relaciones.dat";
+	private static String ficheroProductos = "src/practica1/productos.dat";
 	
 	public static void main(String[] args) {
 		
@@ -30,13 +44,52 @@ public class Main {
 				repeticiones = Integer.parseInt(args[i + 1]);
 			else if (args[i].equals("-a"))
 				tipoAlgoritmo = args[i + 1];	
+			else if (args[i].equals("-n"))
+				random = Integer.parseInt(args[i + 1]);
+			else if (args[i].equals("-u"))
+				usarProbabilidad = Integer.parseInt(args[i + 1]);
+			else if (args[i].equals("-d"))
+				debug = Integer.parseInt(args[i + 1]);
+			else if (args[i].equals("-fm"))
+				ficheroMatriz = args[i + 1];			
+			else if (args[i].equals("-fp"))
+				ficheroProductos = args[i + 1];
 		}
+		
+		/*
+		 * Comprobacion de parametros
+		 */
+		
+		// Algoritmo
+		if (tipoAlgoritmo.equals("k")) System.out.print("Karger - ");
+		else if (tipoAlgoritmo.equals("ks")) System.out.print("Karger-Stein - ");
+
+		// Random
+		if (random == 0) System.out.print("Random - ");
+		else if (random == 1) System.out.print("SecureRandom - ");
+		else if (random == 2) System.out.print("HighQualityRandom - ");
+		else if (random == 3) System.out.print("XORShiftRandom - ");
+		else random = 0;
+		
+		// Repeticiones
+		System.out.print(repeticiones + " repeticiones - ");
+		
+		// Tipo matriz
+		if (usarProbabilidad == 0) System.out.print("matriz booleanos");
+		else if (usarProbabilidad == 1) System.out.print("matriz enteros");
+		else usarProbabilidad = 0; 
+		System.out.println();
 			
 		// Para que las comas sean puntos
 		Locale.setDefault(new Locale("en", "UK"));
 		
 		GestorDatos gd = new GestorDatos(numProductos, true, tipoProductos == 0 ? false : true);
-		gd.generarDatos(FICHERO_PRODUCTOS, FICHERO_RELACIONES);
+		if (ficheroProductos.isEmpty() || ficheroMatriz.isEmpty()) {
+			gd.generarDatos(FICHERO_PRODUCTOS, FICHERO_RELACIONES);
+		}
+		else {
+			gd = new GestorDatos(numProductos, ficheroMatriz, ficheroProductos);
+		}
 		
 		// Generacion de productos
 		System.out.print("Generando " + numProductos + " productos...");
@@ -59,23 +112,47 @@ public class Main {
 		System.out.println(" HECHO");
 		
 		// Matriz
-		System.out.println(g.toString());
-				
+		if (debug == 1)
+			System.out.println(g.toString());
+			
+		long[] tiempos = new long[repeticiones];
+		int[] cortes = new int[repeticiones];
 		// Ejecucion del algoritmo
 		for (int i = 0; i < repeticiones; i++) {
-			System.out.println("Ejecucion " + (i + 1));
+			if (debug == 1)
+				System.out.println("Ejecucion " + (i + 1));
+			long tiempo = System.currentTimeMillis();
 			// Eleccion de algoritmo
 			MinCut krager = null;
 			if (tipoAlgoritmo.equals("k"))
-				krager = new KargerAlgorithm(g);
+				krager = new KargerAlgorithm(g, random, usarProbabilidad == 1 ? true : false);
 			else if (tipoAlgoritmo.equals("ks"))
-				krager = new KargerSteinAlgortihm(g);
+				krager = new KargerSteinAlgortihm(g, random, usarProbabilidad == 1 ? true : false);
 			else {
 				System.out.println("Parametro no valido, algoritmo por defecto");
 				krager = new KargerAlgorithm(g);
 			}
-			krager.reducirGrafo();
-			System.out.println();
+			
+			Grafo minCut = krager.reducirGrafo();
+			
+			cortes[i] = minCut.getAristas().size();
+			tiempo = System.currentTimeMillis() - tiempo;
+			tiempos[i] = tiempo;
+			
+			if (debug == 1) {
+				System.out.println("MINCUT: " + cortes[i]);
+				System.out.println("TIEMPO: " + tiempo + " ms");
+				System.out.println();
+			}
 		}
+		
+		long tiempoMedio = 0;
+		double corteMedio = 0;
+		for (int i = 0; i < repeticiones; i++) {
+			corteMedio += cortes[i];
+			tiempoMedio += tiempos[i];
+		}
+		System.out.println("CORTE MEDIO: " + corteMedio / repeticiones + " aristas");
+		System.out.println("TIEMPO MEDIO: " + tiempoMedio / repeticiones + " ms");
 	}
 }

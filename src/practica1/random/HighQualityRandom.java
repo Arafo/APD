@@ -1,28 +1,41 @@
+/**
+* La clase HighQualityRandom genera numeros
+* aleatorios mediante dos generadores XORShift
+* combinados con un LCG y un generador de 
+* multiplicacion con carry.
+* http://www.javamex.com/tutorials/random_numbers/numerical_recipes.shtml
+*
+* @author  Rafael Marcen Altarriba (650435)
+* @author  Jose Angel Caudevilla Casasus (649003)
+* @version 1.0
+* @since   07-01-2017
+*/
+
 package practica1.random;
 
 import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-/**
- * 
- * http://www.javamex.com/tutorials/random_numbers/numerical_recipes.shtml
- *
- */
 public class HighQualityRandom extends Random {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private Lock l = new ReentrantLock();
 	private long u;
 	private long v = 4101842887655102017L;
 	private long w = 1;
 
+	/**
+	 * Constructor
+	 */
 	public HighQualityRandom() {
 		this(System.nanoTime());
 	}
 
+	/**
+	 * Constructor
+	 * @param seed
+	 */
 	public HighQualityRandom(long seed) {
 		l.lock();
 		u = seed ^ v;
@@ -33,7 +46,10 @@ public class HighQualityRandom extends Random {
 		nextLong();
 		l.unlock();
 	}
-
+	
+	/**
+	 * Devuelve un numero long de forma aleatorio
+	 */
 	public long nextLong() {
 		l.lock();
 		try {
@@ -52,10 +68,9 @@ public class HighQualityRandom extends Random {
 		}
 	}
 
-	protected int next(int bits) {
-		return (int) (nextLong() >>> (64 - bits));
-	}
-	
+	/**
+	 * Devuelve un numero entero aleatorio comprendido entre 0 y <n>
+	 */
 	public int nextInt(int n) {
 		long result = ((nextLong() >>> 32) * n) >> 32;
 		return (int)result;	
