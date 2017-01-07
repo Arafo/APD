@@ -97,7 +97,7 @@ public class KargerAlgorithm implements MinCut {
 
 			// Se busca una arista con productos con la misma marca
 			Arista tmp = null;
-			/*for (Arista a : this.grafoCopia.getAristas()) {
+			for (Arista a : this.grafoCopia.getAristas()) {
 					Producto p1 = this.grafoCopia.getVertices().get(a.getOrigen()).getProducto();
 					Producto p2 = this.grafoCopia.getVertices().get(a.getDestino()).getProducto();
 
@@ -105,7 +105,7 @@ public class KargerAlgorithm implements MinCut {
 						tmp = a;
 						break;
 					}
-			}*/
+			}
 
 			// Si no se encuentra ninguna arista se elige una al azar
 			if (tmp == null) {
