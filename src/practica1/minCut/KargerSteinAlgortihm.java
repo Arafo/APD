@@ -57,13 +57,4 @@ public class KargerSteinAlgortihm extends MinCut {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param g
-	 * @param t
-	 * @return
-	 */
-
-
-	
 }

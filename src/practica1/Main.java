@@ -23,14 +23,14 @@ public class Main {
 	private final static String FICHERO_PRODUCTOS = "grafos/productos.dat";
 	private final static String FICHERO_RELACIONES = "grafos/relaciones.dat";
 	private static int repeticiones = 10;
-	private static int numProductos = 10;
+	private static int numProductos = 6;
 	private static int tipoProductos = 0; // 0 -> booleanos, 1 -> enteros
 	private static String tipoAlgoritmo = "k"; // k -> Karger, ks -> Karger-Stein
 	private static int random = 0; // 0 -> random, 1 -> SecureRandom, 2 -> HighQualityRandom, 3 -> XORShiftRandom
 	private static int usarProbabilidad = 0; // Flag para el apartado 6: 0 -> No, 1 -> Si
 	private static int debug = 1;
-	private static String ficheroMatriz = "";
-	private static String ficheroProductos = "";
+	private static String ficheroMatriz = "grafos/relaciones6b.dat";
+	private static String ficheroProductos = "grafos/productos6b.dat";
 	
 	public static void main(String[] args) {
 		

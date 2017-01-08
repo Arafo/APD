@@ -36,6 +36,7 @@ public class KargerAlgorithm extends MinCut {
 	public Grafo reducirGrafo() {
 		// TODO Auto-generated method stub
 		return minCut(this.grafoCopia, 2);
+
 	}
 
 }
