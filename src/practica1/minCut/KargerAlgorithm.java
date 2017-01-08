@@ -141,8 +141,10 @@ public class KargerAlgorithm implements MinCut {
 		// Aristas en el corte
 		if (debug) {
 			System.out.println("MINCUT: " + this.grafoCopia.getAristas().size());
+			System.out.print("Aristas: ");
 			for (Arista a : this.grafoCopia.getAristas())
-				System.out.println("Arista " + a.getConexionOriginal());
+				System.out.print(a.getConexionOriginal() + ", ");
+			System.out.println();
 		}
 		
 		return this.grafoCopia;

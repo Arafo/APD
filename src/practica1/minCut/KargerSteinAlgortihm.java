@@ -175,9 +175,11 @@ public class KargerSteinAlgortihm implements MinCut {
 
 		// Aristas en el corte
 		if (debug) {
-			System.out.println("MINCUT: " + g.getAristas().size());
-			for (Arista a : g.getAristas())
-				System.out.println("Arista " + a.getConexionOriginal());
+			System.out.println("MINCUT: " + this.grafoCopia.getAristas().size());
+			System.out.print("Aristas: ");
+			for (Arista a : this.grafoCopia.getAristas())
+				System.out.print(a.getConexionOriginal() + ", ");
+			System.out.println();
 		}
 		
 		return g;
