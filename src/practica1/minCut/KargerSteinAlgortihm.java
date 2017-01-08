@@ -1,15 +1,20 @@
+/**
+* Implementacion del algoritmo de Karger-Stein
+* http://research.omicsgroup.org/index.php/Karger's_algorithm#Karger.E2.80.93Stein_algorithm
+* 
+* @author  Rafael Marcen Altarriba (650435)
+* @author  Jose Angel Caudevilla Casasus (649003)
+* @version 1.0
+* @since   07-01-2017
+*/
+
 package practica1.minCut;
 
 import practica1.grafo.Grafo;
 
-/**
- * Reference
- * http://research.omicsgroup.org/index.php/Karger's_algorithm#Karger.E2.80.93Stein_algorithm
- * 
- * @author Portátil1
- *
- */
+
 public class KargerSteinAlgortihm extends MinCut {
+	private boolean debug = false;
 
 	public KargerSteinAlgortihm(Grafo f) {
 		// TODO Auto-generated constructor stub
@@ -30,9 +35,13 @@ public class KargerSteinAlgortihm extends MinCut {
 	@Override
 	public Grafo reducirGrafo() {
 		return this.FastMinCut(this.grafoCopia);
-
 	}
-
+	
+	/**
+	 * 
+	 * @param g
+	 * @return
+	 */
 	private Grafo FastMinCut(Grafo g) {
 		if (g.getVertices().size() < 6) {
 			return minCut(g, 2);
@@ -45,12 +54,16 @@ public class KargerSteinAlgortihm extends MinCut {
 				return FastMinCut(g2);
 			else
 				return FastMinCut(g1);
-
 		}
 	}
-
+	
+	/**
+	 * 
+	 * @param g
+	 * @param t
+	 * @return
+	 */
 
 
 	
-
 }
