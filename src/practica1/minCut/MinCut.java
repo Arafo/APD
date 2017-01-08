@@ -47,7 +47,7 @@ public abstract class MinCut {
 	public MinCut(Grafo f, int random, boolean usarProbabilidad) {
 		this.grafoCopia = f.copiarGrafo();
 		this.random = random;
-		this.usarProbabilidad = true;
+		this.usarProbabilidad = usarProbabilidad;
 	}
 	
 	public Grafo getGrafoCopia() {

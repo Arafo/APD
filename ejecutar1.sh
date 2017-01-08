@@ -26,7 +26,7 @@ java -cp bin practica1.Main -p 200 -t 0 -r 10 -a k -n 3 -u 0 -d 0 -fm grafos/rel
 #java -cp bin practica1.Main -p 500 -t 0 -r 10 -a k -n 3 -u 0 -d 0 -fm grafos/relaciones500b.dat -fp grafos/productos500b.dat
 
 # 10 repeticiones del algoritmo de Karger-Stein con el generador Random y con una matriz 6x6 de booleanos.
-java -cp bin practica1.Main -p 10 -t 0 -r 10 -a ks -n 0 -u 0 -d 0 -fm grafos/relaciones6b.dat -fp grafos/productos6b.dat
+java -cp bin practica1.Main -p 6 -t 0 -r 10 -a ks -n 0 -u 0 -d 0 -fm grafos/relaciones6b.dat -fp grafos/productos6b.dat
 # 10 repeticiones del algoritmo de Karger-Stein con el generador Random y con una matriz 10x10 de booleanos.
 java -cp bin practica1.Main -p 10 -t 0 -r 10 -a ks -n 0 -u 0 -d 0 -fm grafos/relaciones10b.dat -fp grafos/productos10b.dat
 # 10 repeticiones del algoritmo de Karger-Stein con el generador SecureRandom y con una matriz 50x50 de booleanos.
