@@ -37,15 +37,15 @@ public class KargerAlgorithmTest {
 		vertices.put(2, new Vertice(2, p2));
 		vertices.put(3, new Vertice(3, p3));
 		//artistas
-		aristas.add(new Arista(0, 1,2000));
-		aristas.add(new Arista(0, 2,10));
-		aristas.add(new Arista(0, 3,20));
-		aristas.add(new Arista(1, 3,200));
-		aristas.add(new Arista(2, 3,4000));
+		aristas.add(new Arista(0, 1,2));
+		aristas.add(new Arista(0, 2,2));
+		aristas.add(new Arista(0, 3,2));
+		aristas.add(new Arista(1, 3,2));
+		aristas.add(new Arista(2, 3,2));
 		
 		Grafo grafoTest = new Grafo(vertices, aristas);
 		System.out.println(grafoTest.toString());
-		KargerAlgorithm minCut=new KargerAlgorithm(grafoTest);
+		KargerAlgorithm minCut=new KargerAlgorithm(grafoTest,true);
 		minCut.reducirGrafo();	
 	}
 }

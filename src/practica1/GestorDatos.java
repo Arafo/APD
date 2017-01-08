@@ -261,7 +261,7 @@ public class GestorDatos {
 		Grafo g = new Grafo(matrizEnteros, productos);
 		System.out.println(g.toString());
 		
-		MinCut krager= new KargerAlgorithm(g);
+		MinCut krager= new KargerAlgorithm(g,false);
 		krager.reducirGrafo();
 		//System.out.println(g.AdjString(matriz));
 	}
