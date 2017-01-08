@@ -24,8 +24,8 @@ import practica1.grafo.Producto;
 
 public class GestorDatos {
 	
-	private String FICHERO_PRODUCTOS = "src/practica1/productos.dat";
-	private String FICHERO_RELACIONES = "src/practica1/relaciones.dat";
+	private String FICHERO_PRODUCTOS = "grafos/productos.dat";
+	private String FICHERO_RELACIONES = "grafos/relaciones.dat";
 	
 	// Cosas del producto
 	private final int MAX_UNIDADES = 1000;

@@ -20,8 +20,8 @@ import practica1.minCut.MinCut;
 
 public class Main {
 	
-	private final static String FICHERO_PRODUCTOS = "src/practica1/productos.dat";
-	private final static String FICHERO_RELACIONES = "src/practica1/relaciones.dat";
+	private final static String FICHERO_PRODUCTOS = "grafos/productos.dat";
+	private final static String FICHERO_RELACIONES = "grafos/relaciones.dat";
 	private static int repeticiones = 10;
 	private static int numProductos = 10;
 	private static int tipoProductos = 0; // 0 -> booleanos, 1 -> enteros
@@ -29,8 +29,8 @@ public class Main {
 	private static int random = 0; // 0 -> random, 1 -> SecureRandom, 2 -> HighQualityRandom, 3 -> XORShiftRandom
 	private static int usarProbabilidad = 0; // Flag para el apartado 6: 0 -> No, 1 -> Si
 	private static int debug = 1;
-	private static String ficheroMatriz = "src/practica1/relaciones.dat";
-	private static String ficheroProductos = "src/practica1/productos.dat";
+	private static String ficheroMatriz = "";
+	private static String ficheroProductos = "";
 	
 	public static void main(String[] args) {
 		
@@ -112,8 +112,11 @@ public class Main {
 		System.out.println(" HECHO");
 		
 		// Matriz
-		if (debug == 1)
+		if (debug == 1) {
+			System.out.println("Vertices: " + g.getVertices().size());
+			System.out.println("Aristas: " + g.getAristas().size());
 			System.out.println(g.toString());
+		}
 			
 		long[] tiempos = new long[repeticiones];
 		int[] cortes = new int[repeticiones];
