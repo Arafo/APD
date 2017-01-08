@@ -14,7 +14,6 @@ import practica1.grafo.Grafo;
 
 
 public class KargerSteinAlgortihm extends MinCut {
-	private boolean debug = false;
 
 	public KargerSteinAlgortihm(Grafo f) {
 		// TODO Auto-generated constructor stub

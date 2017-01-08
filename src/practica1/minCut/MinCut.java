@@ -30,14 +30,13 @@ public abstract class MinCut {
 	protected Grafo grafoCopia;
 	protected int random;
 	protected boolean usarProbabilidad; // flag para el apartado 6
+	private boolean debug = false;
 	
 	public MinCut(Grafo f) {
-		// TODO Auto-generated constructor stub
 		this(f, 0, false);
 	}
 
 	public MinCut(Grafo f, boolean usarProbabilidad) {
-		// TODO Auto-generated constructor stub
 		this(f, 0, usarProbabilidad);
 	}
 
@@ -86,83 +85,79 @@ public abstract class MinCut {
 
 			// Se busca una arista con productos con la misma marca
 			// Se busca una arista con productos con la misma marca
-						Arista tmp = null;
-						// si no uso valores enteros matriz
-						if (!this.usarProbabilidad) {
-							for (int i = 0; i < g.getAristas().size(); i++) {
-								Arista a = g.getAristas().get(r.nextInt(g.getAristas().size() - 1));
-								Producto p1 = g.getVertices().get(a.getOrigen()).getProducto();
-								Producto p2 = g.getVertices().get(a.getDestino()).getProducto();
+			Arista tmp = null;
+			// si no uso valores enteros matriz
+			if (!this.usarProbabilidad) {
+				for (int i = 0; i < g.getAristas().size(); i++) {
+					Arista a = g.getAristas().get(r.nextInt(g.getAristas().size() - 1));
+					Producto p1 = g.getVertices().get(a.getOrigen()).getProducto();
+					Producto p2 = g.getVertices().get(a.getDestino()).getProducto();
 
-								if (p1.getMarca().equals(p2.getMarca())) {
-									tmp = a;
-									break;
-								}
-							}
+					if (p1.getMarca().equals(p2.getMarca())) {
+						tmp = a;
+						break;
+					}
+				}
 
-							// Si no se encuentra ninguna arista se elige una al azar
-							if (tmp == null) {
-								aristaActual = g.getAristas()
-										.remove(r.nextInt(g.getAristas().size() - 1));
-								System.out.println("Arista al azar: " + aristaActual.toString());
-							} else {
-								g.getAristas().remove(tmp);
-								aristaActual = tmp;
-								System.out.println(aristaActual.toString());
-							}
-						} else {
-							
-							// busca productor por numero de compras y de la misma marca
-							for (Arista a : g.getAristas()) {
-								float probability = (a.getJuntos() == 0) ? 0.0f
-										: a.getJuntos() * 100.0f / g.getTotalCompras();
-								if (!usarProbabilidad || r.nextFloat() * 100.0f <= (100.0f - probability)) {
-									Producto p1 = g.getVertices().get(a.getOrigen()).getProducto();
-									Producto p2 = g.getVertices().get(a.getDestino()).getProducto();
-									if (p1.getMarca().equals(p2.getMarca())) {
-										tmp = a;
-										break;
-									}
-									//seleciono la arista pero busco mejores candidatos
-									else{						
-										tmp = a;
-									}
-								}
-							}
-							if (tmp == null) {
-								aristaActual = g.getAristas()
-										.remove(r.nextInt(g.getAristas().size()));
-								System.out.println("Arista al azar: " + aristaActual.toString());
-							}else {
-								g.getAristas().remove(tmp);
-								aristaActual = tmp;
-								System.out.println(aristaActual.toString());
-							}
-
+				// Si no se encuentra ninguna arista se elige una al azar
+				if (tmp == null) {
+					aristaActual = g.getAristas().remove(r.nextInt(g.getAristas().size() - 1));
+					if (debug)
+						System.out.println("Arista al azar: " + aristaActual.toString());
+				} else {
+					g.getAristas().remove(tmp);	
+					aristaActual = tmp;
+					if (debug)
+						System.out.println(aristaActual.toString());
+				}
+			} else {
+				// busca productor por numero de compras y de la misma marca
+				for (Arista a : g.getAristas()) {
+					float probability = (a.getJuntos() == 0) ? 0.0f	: a.getJuntos() * 100.0f / g.getTotalCompras();
+					if (!usarProbabilidad || r.nextFloat() * 100.0f <= (100.0f - probability)) {
+						Producto p1 = g.getVertices().get(a.getOrigen()).getProducto();
+						Producto p2 = g.getVertices().get(a.getDestino()).getProducto();
+						if (p1.getMarca().equals(p2.getMarca())) {
+							tmp = a;
+							break;
 						}
-
-			// arista al azar
-			// aristaActual = g.getAristas().remove(
-			// r.nextInt(g.getAristas().size()));
-			// vertices que contiene la arista
-			// si son los mismos no vale (este caso no deberia darse??)
-			// if (aristaActual.getOrigen() == aristaActual.getDestino())
-			// continue;
+						//seleciono la arista pero busco mejores candidatos
+						else {						
+							tmp = a;
+						}
+					}
+				}
+				if (tmp == null) {
+					aristaActual = g.getAristas().remove(r.nextInt(g.getAristas().size()));
+					if (debug)			
+						System.out.println("Arista al azar: " + aristaActual.toString());
+				} 
+				else {
+					g.getAristas().remove(tmp);
+					aristaActual = tmp;
+					if (debug)			
+						System.out.println(aristaActual.toString());
+				}
+			}
 
 			unir(g, aristaActual.getOrigen(), aristaActual.getDestino(), aristaActual);
-			// System.out.println();
-			System.out.println();
-			System.out.println(g.toString());
+			
+			if (debug) {
+				// System.out.println();
+				System.out.println();
+				System.out.println(g.toString());
+			}
 		}
 
 		// Aristas en el corte
-		System.out.println("MINCUT: " + g.getAristas().size());
-		for (Arista a : g.getAristas())
-			System.out.println("Arista " + a.getConexionOriginal());
-
+		if (debug) {
+			//System.out.println("MINCUT: " + g.getAristas().size());
+			for (Arista a : g.getAristas())
+				System.out.println("Arista: " + a.getConexionOriginal());
+		}
+		
 		return g;
 	}
-	
 	
 
 	/**
@@ -208,26 +203,7 @@ public abstract class MinCut {
 		}
 
 		g.getVertices().put(unido.getIndice(), unido);
-
-		if (v1.getAristas().size() <= v2.getAristas().size()) {
-
-			// v2.fusionarVertices(v1);
-			// g.getVertices().put(v2.getIndice(), v2);
-		} else {
-			// v1.fusionarVertices(v2);
-			// g.getVertices().put(v1.getIndice(), v1);
-
-		}
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	public abstract Grafo reducirGrafo();
-
 }

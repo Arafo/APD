@@ -75,9 +75,9 @@ public class Main {
 		System.out.print(repeticiones + " repeticiones - ");
 		
 		// Tipo matriz
-		if (usarProbabilidad == 0) System.out.print("matriz booleanos");
-		else if (usarProbabilidad == 1) System.out.print("matriz enteros");
-		else usarProbabilidad = 0; 
+		if (tipoProductos == 0) System.out.print("matriz booleanos");
+		else if (tipoProductos == 1) System.out.print("matriz enteros");
+		else tipoProductos = 0; 
 		System.out.println();
 			
 		// Para que las comas sean puntos
@@ -85,14 +85,15 @@ public class Main {
 		
 		GestorDatos gd = new GestorDatos(numProductos, true, tipoProductos == 0 ? false : true);
 		if (ficheroProductos.isEmpty() || ficheroMatriz.isEmpty()) {
+			System.out.print("Generando " + numProductos + " productos...");
 			gd.generarDatos(FICHERO_PRODUCTOS, FICHERO_RELACIONES);
 		}
 		else {
+			System.out.print("Cargando " + numProductos + " productos...");
 			gd = new GestorDatos(numProductos, ficheroMatriz, ficheroProductos);
 		}
 		
 		// Generacion de productos
-		System.out.print("Generando " + numProductos + " productos...");
 		Hashtable<Integer, Producto> productos = gd.obtenerProductos();
 		System.out.println(" HECHO");
 
@@ -100,7 +101,12 @@ public class Main {
 		boolean[][] matriz = null;
 		int[][] matrizEnteros = null;
 		Grafo g = null;
-		System.out.print("Generando matriz " + numProductos + "x" + numProductos + "...");
+		
+		if (ficheroProductos.isEmpty() || ficheroMatriz.isEmpty())
+			System.out.print("Generando matriz " + numProductos + "x" + numProductos + "...");
+		else 
+			System.out.print("Cargando matriz " + numProductos + "x" + numProductos + "...");
+
 		if (tipoProductos == 0) {
 			matriz = gd.obtenerRelaciones();
 			g = new Grafo(matriz, productos);
