@@ -8,7 +8,7 @@
 * @author  Rafael Marcen Altarriba (650435)
 * @author  Jose Angel Caudevilla Casasus (649003)
 * @version 1.0
-* @since   07-01-2017
+* @date    09-01-2017
 */
 
 package practica1.random;
@@ -34,7 +34,7 @@ public class HighQualityRandom extends Random {
 
 	/**
 	 * Constructor
-	 * @param seed
+	 * @param seed Semilla
 	 */
 	public HighQualityRandom(long seed) {
 		l.lock();

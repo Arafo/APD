@@ -4,7 +4,7 @@
 * @author  Rafael Marcen Altarriba (650435)
 * @author  Jose Angel Caudevilla Casasus (649003)
 * @version 1.0
-* @since   07-01-2017
+* @date    09-01-2017
 */
 
 package practica1;
@@ -15,7 +15,7 @@ import java.util.Locale;
 import practica1.grafo.Grafo;
 import practica1.grafo.Producto;
 import practica1.minCut.KargerAlgorithm;
-import practica1.minCut.KargerSteinAlgortihm;
+import practica1.minCut.KargerSteinAlgorithm;
 import practica1.minCut.MinCut;
 
 public class Main {
@@ -136,7 +136,7 @@ public class Main {
 			if (tipoAlgoritmo.equals("k"))
 				krager = new KargerAlgorithm(g, random, usarProbabilidad == 1 ? true : false);
 			else if (tipoAlgoritmo.equals("ks"))
-				krager = new KargerSteinAlgortihm(g, random, usarProbabilidad == 1 ? true : false);
+				krager = new KargerSteinAlgorithm(g, random, usarProbabilidad == 1 ? true : false);
 			else {
 				System.out.println("Parametro no valido, algoritmo por defecto");
 				krager = new KargerAlgorithm(g);

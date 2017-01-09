@@ -1,28 +1,47 @@
-MarcŽn Altarriba, Rafael	650435@unizar.es	a650435
-Caudevilla Casasœs, Jose Angel	649003@unizar.es	a649003
+Marcén Altarriba, Rafael	650435@unizar.es	a650435
+Caudevilla Casasús, Jose Angel	649003@unizar.es	a649003
 
 #################################
-# ORGANIZACIîN
+# ORGANIZACIÓN
 #################################
 
+Marcén Altarriba, Rafael 
+	- Diseño del grafo.
+	- Diseño de las pruebas
+	- Diseño de la clase principal
+	- Diseño de los generadores aleatorios
+
+Caudevilla Casasús, Jose Angel
+	- Diseño del algoritmo Karger
+	- Diseño del algoritmo Karger-Stein
 
 #################################
-# REALIZACION DE PRUEBAS
+# REALIZACIÓN DE PRUEBAS
 #################################
-Para la realizaci—n de la pruebas se ha creado el script 'ejecutarX.sh'. Dicho script realiza la ejecuci—n de los distintos pruebas de formal secuencial. La forma de ejecutar el script es la siguiente:
-	./ejecutarX
+Para la realización de la pruebas se ha creado el script 'ejecutar1.sh'. Dicho script realiza la ejecución de los distintos pruebas de formal secuencial. La forma de ejecutar el script es la siguiente:
+	./ejecutar1.sh
 
 En este script se realizan  todos los tipos de pruebas posibles:
-- 10 repeticiones del algoritmo de Karger con una matriz 10x10 de booleanos.
-- 10 repeticiones del algoritmo de Karger con una matriz 10x10 de enteros.
-- 10 repeticiones del algoritmo de Karger-Stein con una matriz 10x10 de booleanos.
-- 10 repeticiones del algoritmo de Karger-Stein con una matriz 10x10 de enteros.
-- 10 repeticiones del algoritmo de Karger con una matriz 100x100 de booleanos.
-- 10 repeticiones del algoritmo de Karger con una matriz 100x100 de enteros.
-- 10 repeticiones del algoritmo de Karger-Stein con una matriz 100x100 de booleanos.
-- 10 repeticiones del algoritmo de Karger-Stein con una matriz 100x100 de enteros.
+# Karger
+- 10 repeticiones del algoritmo de Karger con el generador Random y con una matriz 6x6 de booleanos.
+- 10 repeticiones del algoritmo de Karger con el generador Random y con una matriz 10x10 de booleanos.
+- 10 repeticiones del algoritmo de Karger con el generador Random y con una matriz 50x50 de booleanos.
+- 10 repeticiones del algoritmo de Karger con el generador Random y con una matriz 100x100 de booleanos.
+- 10 repeticiones del algoritmo de Karger con el generador Random y con una matriz 200x200 de booleanos.
+# Karger-Stein
+- 10 repeticiones del algoritmo de Karger-Stein con el generador Random y con una matriz 6x6 de booleanos.
+- 10 repeticiones del algoritmo de Karger-Stein con el generador Random y con una matriz 10x10 de booleanos.
+- 10 repeticiones del algoritmo de Karger-Stein con el generador Random y con una matriz 50x50 de booleanos.
+- 10 repeticiones del algoritmo de Karger-Stein con el generador Random y con una matriz 100x100 de booleanos.
+- 10 repeticiones del algoritmo de Karger-Stein con el generador Random y con una matriz 200x200 de booleanos.
+# Karger con matriz enteros (apartado 6)
+- 10 repeticiones del algoritmo de Karger con el generador Random y con una matriz 4x4 de enteros.
+- 10 repeticiones del algoritmo de Karger con el generador Random y con una matriz 10x10 de enteros.
+- 10 repeticiones del algoritmo de Karger con el generador Random y con una matriz 50x50 de enteros.
+- 10 repeticiones del algoritmo de Karger con el generador Random y con una matriz 100x100 de enteros.
+- 10 repeticiones del algoritmo de Karger con el generador Random y con una matriz 200x200 de enteros.
 
-Si se desea, tambiŽn se puede realizar la realizaci—n de las pruebasusando directamente el fichero java mediante la ejecuci—n de:
+Si se desea, también se puede realizar la realización de las pruebasusando directamente el fichero java mediante la ejecución de:
 	java -cp bin practica1.Main -p <productos> -t <tipo> -r <repeticiones> -a <algoritmo>
  
 Donde productos es la cantidad de productos que contiene el grafo, tipo es el tipo de datos de la matriz (0 booleanos y 1 enteros), repeticiones es el nœmero de repeticiones del algoritmo y algoritmo es el tipo de algoritmo (k Karger y ks Karger-Stein)
@@ -30,3 +49,27 @@ Donde productos es la cantidad de productos que contiene el grafo, tipo es el ti
 #################################
 # NOTAS ADICCIONALES
 #################################
+
+El programa posee las siguientes opciones de ejecución:
+
+	-p Número de productos
+	-t Tipo de relacion entre productos:
+		0 booleanos
+		1 enteros
+	-r Numero de repeticiones del algoritmo
+	-a Tipo de algoritmo a usar:
+		'k' uso de Karger 
+		'ks' uso de Karger-Stein
+	-n uso de un tipo de generador aleatorio: 
+		0 -> random
+		1 -> SecureRandom
+		2 -> HighQualityRandom
+		3 -> XORShiftRandom
+	-u flag para el apartado 6
+		0 -> No
+		1 -> Si
+	-d uso de debug
+		0 -> No
+		1 -> Si
+	-fm uso de un fichero de matrices de adyacencia
+	-fp uso de un fichero de matrices de productos

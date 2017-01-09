@@ -4,7 +4,7 @@
 * @author  Rafael Marcen Altarriba (650435)
 * @author  Jose Angel Caudevilla Casasus (649003)
 * @version 1.0
-* @since   07-01-2017
+* @date    09-01-2017
 */
 
 package practica1.minCut;
@@ -14,29 +14,47 @@ import practica1.grafo.Grafo;
 
 public class KargerAlgorithm extends MinCut {
 
+	/**
+	 * Constructor
+	 * @param f Grafo
+	 */
 	public KargerAlgorithm(Grafo f) {
-		// TODO Auto-generated constructor stub
 		super(f, 0, false);
 	}
-
+	
+	/**
+	 * Constructor
+	 * @param f Grafo
+	 * @param usarProbabilidad Flag del apartado 6
+	 */
 	public KargerAlgorithm(Grafo f, boolean usarProbabilidad) {
-		// TODO Auto-generated constructor stub
 		super(f, 0, usarProbabilidad);
 	}
-
+	
+	/**
+	 * Constructor
+	 * @param f Grafo
+	 * @param random Tipo de generador a utilizar
+	 */
 	public KargerAlgorithm(Grafo f, int random) {
 		super(f, random, false);
 	}
-
+	
+	/**
+	 * Constructor
+	 * @param f Grafo
+	 * @param random Tipo de generador a utilizar
+	 * @param usarProbabilidad Falg del apartado 6
+	 */
 	public KargerAlgorithm(Grafo f, int random, boolean usarProbabilidad) {
 		super(f, random, usarProbabilidad);
 	}
 
+	/**
+	 * Metodo que reduce un grafo mediante el algoritmo de Karger
+	 */
 	@Override
 	public Grafo reducirGrafo() {
-		// TODO Auto-generated method stub
 		return minCut(this.grafoCopia, 2);
-
 	}
-
 }

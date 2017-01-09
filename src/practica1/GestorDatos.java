@@ -5,7 +5,7 @@
 * @author  Rafael Marcen Altarriba (650435)
 * @author  Jose Angel Caudevilla Casasus (649003)
 * @version 1.0
-* @since   07-01-2017
+* @date    09-01-2017
 */
 
 package practica1;
@@ -27,7 +27,7 @@ public class GestorDatos {
 	private String FICHERO_PRODUCTOS = "grafos/productos.dat";
 	private String FICHERO_RELACIONES = "grafos/relaciones.dat";
 	
-	// Cosas del producto
+	// Datos de los prodcutos
 	private final int MAX_UNIDADES = 1000;
 	private final int MAX_PRECIO = 1000;
 	private final int MAX_JUNTOS = 10;
@@ -38,7 +38,7 @@ public class GestorDatos {
 
 	/**
 	 * Constructor
-	 * @param productos
+	 * @param productos Número de productos
 	 */
 	public GestorDatos(int productos) {
 		this.productos = productos;
@@ -46,8 +46,8 @@ public class GestorDatos {
 	
 	/**
 	 * Constructor
-	 * @param productos
-	 * @param override
+	 * @param productos Número de productos
+	 * @param override Sobreescribe los ficheros existentes
 	 */
 	public GestorDatos(int productos, boolean override) {
 		this.productos = productos;
@@ -56,9 +56,9 @@ public class GestorDatos {
 	
 	/**
 	 * Constructor
-	 * @param productos
-	 * @param override
-	 * @param enteros
+	 * @param productos Número de productos
+	 * @param override Sobreescribe los ficheros existentes
+	 * @param enteros Matriz de enteros
 	 */
 	public GestorDatos(int productos, boolean override, boolean enteros) {
 		this.productos = productos;
@@ -68,9 +68,9 @@ public class GestorDatos {
 	
 	/**
 	 * Constructor
-	 * @param productos
-	 * @param ficheroRelaciones
-	 * @param ficheroProductos
+	 * @param productos Número de productos
+	 * @param ficheroRelaciones Ruta del fichero de la matriz
+	 * @param ficheroProductos Ruta del fichero de los productos
 	 */
 	public GestorDatos(int productos, String ficheroRelaciones, String ficheroProductos) {
 		this.productos = productos;
@@ -81,8 +81,8 @@ public class GestorDatos {
 	/**
 	 * Genera los datos de productos y las conexiones del grafo en los ficheros
 	 * <ficheroProdcutos> y <ficheroRelaciones>
-	 * @param ficheroProductos
-	 * @param ficheroRelaciones
+	 * @param ficheroProductos Ruta del fichero de los productos
+	 * @param ficheroRelaciones Ruta del fichero de la matriz
 	 */
 	public void generarDatos(String ficheroProductos, String ficheroRelaciones) {
 		
@@ -111,7 +111,7 @@ public class GestorDatos {
 		String[] marcas = new String[]{"amazon", "amazonymas"};
 
         /*
-         * Generaciï¿½n de productos
+         * Generación de productos
          */
         
         String nombre;
@@ -130,10 +130,8 @@ public class GestorDatos {
         pw1.close();
 
         /*
-         * Generaciï¿½n de relaciones entre productos
+         * Generación de relaciones entre productos
          */
-        
-        //boolean conectado = false;
         Object matriz[][] = new Object[productos][productos];
         for (int i = 0; i < productos; i++) {
         	for (int j = 0; j < productos; j++) {
@@ -143,15 +141,8 @@ public class GestorDatos {
         			matriz[i][j] = matriz[j][i];
         		else {
         			matriz[i][j] = !enteros ? r.nextBoolean() : r.nextInt(MAX_JUNTOS);
-        			//conectado &= matriz[i][j];
         		}
         	}
-        	// Vertice no conectado con nada
-        	/*if (!conectado) {
-        		int s = (productos - i) + r.nextInt(productos - 1);
-        		System.out.println(s);
-        		matriz[i][s] = true;
-        	}*/
         }
         
     	StringBuilder relacion;
@@ -169,7 +160,7 @@ public class GestorDatos {
 	/**
 	 * Devuelve una tabla con los productos almacenados en el fichero 
 	 * <FICHERO_PRODUCTOS>
-	 * @return
+	 * @return Tabla de productos
 	 */
 	public Hashtable<Integer, Producto> obtenerProductos() {
 		Hashtable<Integer, Producto> tabla = new Hashtable<Integer, Producto>();
@@ -189,7 +180,6 @@ public class GestorDatos {
 		    	key++;
 		    	
 		        line = br.readLine();
-		        //System.out.println(p.getNombre() + " " + p.getUnidades() + " " + p.getPrecio());
 		    }
 		}
 		catch(IOException e) {
@@ -203,7 +193,7 @@ public class GestorDatos {
 	/**
 	 * Devuelve una tabla de booleanos con las conexiones del grafo almacenadass en
 	 * el fichero <FICHERO_RELACIONES>
-	 * @return
+	 * @return Matriz de relaciones de booleanos
 	 */
 	public boolean[][] obtenerRelaciones() {
 		boolean relaciones[][] = new boolean[productos][productos];
@@ -216,7 +206,6 @@ public class GestorDatos {
 		    	StringTokenizer st = new StringTokenizer(line);
 		        while (st.hasMoreTokens()) {
 		        	relaciones[i][j] = Boolean.parseBoolean(st.nextToken());
-		        	//System.out.print(relaciones[i][j] + " ");
 		            i++;          
 		        }       
 		        i = 0;
@@ -237,7 +226,7 @@ public class GestorDatos {
 	/**
 	 * Devuelve una tabla de enteros con las conexiones del grafo almacenadass en
 	 * el fichero <FICHERO_RELACIONES>
-	 * @return
+	 * @return Matriz de relaciones de enteros
 	 */
 	public int[][] obtenerRelacionesEnteros() {
 		int relaciones[][] = new int[productos][productos];

@@ -21,72 +21,81 @@ import practica1.grafo.Vertice;
 import practica1.random.HighQualityRandom;
 import practica1.random.XORShiftRandom;
 
-/**
- * Interfaz algoritmos minimun cut sobre grafos
- *
- */
 public abstract class MinCut {
-	
-	protected Grafo grafoCopia;
-	protected int random;
+
+	protected Grafo grafoCopia; // copia del grafo original
+	protected int random; // eleccion de metodo de generacion de numeros
+							// aleatorios
 	protected boolean usarProbabilidad; // flag para el apartado 6
 	private boolean debug = false;
-	
+
+	/**
+	 * Constructor
+	 * 
+	 * @param f
+	 */
 	public MinCut(Grafo f) {
 		this(f, 0, false);
 	}
 
+	/**
+	 * Constructor
+	 * 
+	 * @param f
+	 * @param usarProbabilidad
+	 */
 	public MinCut(Grafo f, boolean usarProbabilidad) {
 		this(f, 0, usarProbabilidad);
 	}
 
+	/**
+	 * Constructor
+	 * 
+	 * @param f
+	 * @param random
+	 */
 	public MinCut(Grafo f, int random) {
 		this(f, random, false);
 	}
 
+	/**
+	 * Constructor
+	 * 
+	 * @param f
+	 * @param random
+	 * @param usarProbabilidad
+	 */
 	public MinCut(Grafo f, int random, boolean usarProbabilidad) {
 		this.grafoCopia = f.copiarGrafo();
 		this.random = random;
 		this.usarProbabilidad = usarProbabilidad;
 	}
-	
+
+	/**
+	 * Metodo que devuelve el grafo copia
+	 * 
+	 * @return
+	 */
 	public Grafo getGrafoCopia() {
 		return grafoCopia;
 	}
-	
-	
+
+	/**
+	 * Metodo que realiza el algoritmo de corte minimo reduciendo el grafo g a t
+	 * vertices
+	 * 
+	 * @param g
+	 * @param t
+	 * @return
+	 */
 	public Grafo minCut(Grafo g, int t) {
 		Arista aristaActual = null;
 
-		Random r = null;
-		switch (random) {
-		case 0:
-			// System.out.println("RANDOM");
-			r = new Random();
-			break;
-		case 1:
-			// System.out.println("SECURERANDOM");
-			r = new SecureRandom();
-			break;
-		case 2:
-			// System.out.println("HIGHQUALITYRANDOM");
-			r = new HighQualityRandom();
-			break;
-		case 3:
-			// System.out.println("XORSHIFTRANDOM");
-			r = new XORShiftRandom();
-			break;
-		default:
-			// System.out.println("RANDOM");
-			r = new Random();
-		}
-
+		Random r = elegirGeneradorAleatorio();
 		while (g.getVertices().size() > t) {
-
-			// Se busca una arista con productos con la misma marca
 			// Se busca una arista con productos con la misma marca
 			Arista tmp = null;
-			// si no uso valores enteros matriz
+			// si no se usan los valores enteros de la matriz
 			if (!this.usarProbabilidad) {
 				for (int i = 0; i < g.getAristas().size(); i++) {
 					Arista a = g.getAristas().get(r.nextInt(g.getAristas().size() - 1));
@@ -105,7 +114,7 @@ public abstract class MinCut {
 					if (debug)
 						System.out.println("Arista al azar: " + aristaActual.toString());
 				} else {
-					g.getAristas().remove(tmp);	
+					g.getAristas().remove(tmp);
 					aristaActual = tmp;
 					if (debug)
 						System.out.println(aristaActual.toString());
@@ -113,7 +122,7 @@ public abstract class MinCut {
 			} else {
 				// busca productor por numero de compras y de la misma marca
 				for (Arista a : g.getAristas()) {
-					float probability = (a.getJuntos() == 0) ? 0.0f	: a.getJuntos() * 100.0f / g.getTotalCompras();
+					float probability = (a.getJuntos() == 0) ? 0.0f : a.getJuntos() * 100.0f / g.getTotalCompras();
 					if (!usarProbabilidad || r.nextFloat() * 100.0f <= (100.0f - probability)) {
 						Producto p1 = g.getVertices().get(a.getOrigen()).getProducto();
 						Producto p2 = g.getVertices().get(a.getDestino()).getProducto();
@@ -121,44 +130,56 @@ public abstract class MinCut {
 							tmp = a;
 							break;
 						}
-						//seleciono la arista pero busco mejores candidatos
-						else {						
+						// seleciono la arista pero busco mejores candidatos
+						else {
 							tmp = a;
 						}
 					}
 				}
 				if (tmp == null) {
 					aristaActual = g.getAristas().remove(r.nextInt(g.getAristas().size()));
-					if (debug)			
+					if (debug)
 						System.out.println("Arista al azar: " + aristaActual.toString());
-				} 
-				else {
+				} else {
 					g.getAristas().remove(tmp);
 					aristaActual = tmp;
-					if (debug)			
+					if (debug)
 						System.out.println(aristaActual.toString());
 				}
 			}
 
 			unir(g, aristaActual.getOrigen(), aristaActual.getDestino(), aristaActual);
-			
-			if (debug) {
-				// System.out.println();
-				System.out.println();
-				System.out.println(g.toString());
-			}
 		}
-
+		
 		// Aristas en el corte
 		if (debug) {
-			//System.out.println("MINCUT: " + g.getAristas().size());
+			// System.out.println("MINCUT: " + g.getAristas().size());
 			for (Arista a : g.getAristas())
 				System.out.println("Arista: " + a.getConexionOriginal());
 		}
-		
+
 		return g;
 	}
-	
+
+	/**
+	 * Metodo que elige un generador aleatorio en funcion del valor de random
+	 * 
+	 * @return
+	 */
+	private Random elegirGeneradorAleatorio() {
+		switch (random) {
+		case 0:
+			return new Random();
+		case 1:
+			return new SecureRandom();
+		case 2:
+			return new HighQualityRandom();
+		case 3:
+			return new XORShiftRandom();
+		default:
+			return new Random();
+		}
+	}
 
 	/**
 	 * Metodo que une dos aristas del grafo
@@ -204,6 +225,10 @@ public abstract class MinCut {
 
 		g.getVertices().put(unido.getIndice(), unido);
 	}
-	
+
+	/**
+	 * Metodo abstracto que reduce un grafo mediante el problema del corte
+	 * minimo
+	 */
 	public abstract Grafo reducirGrafo();
 }

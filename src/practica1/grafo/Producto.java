@@ -4,13 +4,14 @@
 * @author  Rafael Marcen Altarriba (650435)
 * @author  Jose Angel Caudevilla Casasus (649003)
 * @version 1.0
-* @since   07-01-2017
+* @date    09-01-2017
 */
 
 package practica1.grafo;
 
 public class Producto {
 	
+	// Atributos
 	private String nombre;
 	private int unidades;
 	private double precio;
@@ -18,10 +19,10 @@ public class Producto {
 	
 	/**
 	 * Constructor
-	 * @param nombre
-	 * @param unidades
-	 * @param precio
-	 * @param marca
+	 * @param nombre Nombre del producto
+	 * @param unidades Número de unidades
+	 * @param precio Precio del producto
+	 * @param marca Proveedor del producto
 	 */
 	public Producto(String nombre, int unidades, double precio, String marca) {
 		super();
@@ -33,7 +34,7 @@ public class Producto {
 	
 	/**
 	 * Devuelve el nombre del producto
-	 * @return
+	 * @return Nombre del producto
 	 */
 	public String getNombre() {
 		return nombre;
@@ -41,7 +42,7 @@ public class Producto {
 	
 	/**
 	 * Reemplaza el nombre del producto por <nombre>
-	 * @param nombre
+	 * @param nombre Nuevo nombre
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -49,7 +50,7 @@ public class Producto {
 	
 	/**
 	 * Devuelve las unidades del producto
-	 * @return
+	 * @return Unidades del producto
 	 */
 	public int getUnidades() {
 		return unidades;
@@ -57,7 +58,7 @@ public class Producto {
 	
 	/**
 	 * Reemplaza la unidades del producto por <unidades>
-	 * @param unidades
+	 * @param unidades Nuevas unidades
 	 */
 	public void setUnidades(int unidades) {
 		this.unidades = unidades;
@@ -65,7 +66,7 @@ public class Producto {
 	
 	/**
 	 * Devuelve el precio del producto
-	 * @return
+	 * @return Precio del producto
 	 */
 	public double getPrecio() {
 		return precio;
@@ -73,7 +74,7 @@ public class Producto {
 	
 	/**
 	 * Reemplaza el precio del producto por <precio>
-	 * @param precio
+	 * @param precio Nuevo precio
 	 */
 	public void setPrecio(double precio) {
 		this.precio = precio;
@@ -81,7 +82,7 @@ public class Producto {
 
 	/**
 	 * Devuelve la marca del producto
-	 * @return
+	 * @return Marca del producto
 	 */
 	public String getMarca() {
 		return marca;

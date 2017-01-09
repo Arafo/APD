@@ -5,7 +5,7 @@
 * @author  Rafael Marcen Altarriba (650435)
 * @author  Jose Angel Caudevilla Casasus (649003)
 * @version 1.0
-* @since   07-01-2017
+* @date    09-01-2017
 */
 
 package practica1.grafo;
@@ -20,12 +20,12 @@ public class Grafo {
 	
 	private Map<Integer, Vertice> vertices = new TreeMap<Integer, Vertice>();
 	private List<Arista> aristas = new ArrayList<Arista>();
-	private int totalCompras;
+	private int totalCompras; // Numero total de compras que se han realizado
 	
 	/**
 	 * Constructor
-	 * @param matriz
-	 * @param productos
+	 * @param matriz Matriz de relaciones
+	 * @param productos Productos
 	 */
 	public Grafo(boolean[][] matriz, Hashtable<Integer, Producto> productos) {
 		//System.out.println(matriz.length);
@@ -47,8 +47,8 @@ public class Grafo {
 	
 	/**
 	 * Constructor
-	 * @param matriz
-	 * @param productos
+	 * @param matriz Matriz de relaciones de enteros
+	 * @param productos Productos
 	 */
 	public Grafo(int[][] matriz, Hashtable<Integer, Producto> productos) {
 		//System.out.println(matriz.length);
@@ -70,8 +70,8 @@ public class Grafo {
 	
 	/**
 	 * Constructor
-	 * @param vertices
-	 * @param aristas
+	 * @param vertices Mapa de vertices
+	 * @param aristas Lista de aristas
 	 */
 	public Grafo(Map<Integer, Vertice> vertices, List<Arista> aristas) {
 		// TODO Auto-generated constructor stub
@@ -92,11 +92,11 @@ public class Grafo {
 	
 	/**
 	 * Constructor
-	 * @param vertices
-	 * @param aristas
-	 * @param totalCompras
+	 * @param vertices Mapa de vertices
+	 * @param aristas Lista de aristas
+	 * @param totalCompras Total de compras
 	 */
-	public Grafo(Map<Integer, Vertice> vertices, List<Arista> aristas,int totalCompras) {
+	public Grafo(Map<Integer, Vertice> vertices, List<Arista> aristas, int totalCompras) {
 		this.totalCompras=totalCompras;
 		this.vertices =  new TreeMap<Integer, Vertice>(vertices);
 		this.aristas = new ArrayList<Arista>(aristas);
@@ -113,8 +113,8 @@ public class Grafo {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Devuelve el total de compras
+	 * @return Total de compras
 	 */
 	public int getTotalCompras() {
 		return this.totalCompras;
@@ -122,11 +122,11 @@ public class Grafo {
 	
 	/**
 	 * Devuelve el vertice cuyo indice es indice <indice>.
-	 * Si dicho vertice no existe en el grafo, lo aÃ±ade y lo
+	 * Si dicho vertice no existe en el grafo, lo añade y lo
 	 * devuelve
-	 * @param indice
-	 * @param productos
-	 * @return
+	 * @param indice Indice del vertice
+	 * @param productos Mapa de productos
+	 * @return Vertice cuyo indice es <indice>
 	 */
 	public Vertice getVertice(int indice, Hashtable<Integer, Producto> productos) {
         Vertice v;
@@ -138,8 +138,8 @@ public class Grafo {
 	}
 	
 	/**
-	 * Devuelve la lista de arista del grafo
-	 * @return
+	 * Devuelve la lista de aristas del grafo
+	 * @return Lista de aristas
 	 */
 	public List<Arista> getAristas() {
 		return this.aristas;
@@ -147,7 +147,7 @@ public class Grafo {
 	
 	/**
 	 * Devuelve la lista de vertices del grafo
-	 * @return
+	 * @return Mapa de vertices
 	 */
 	public Map<Integer, Vertice> getVertices() {
 		return this.vertices;
@@ -155,7 +155,7 @@ public class Grafo {
 	
 	/**
 	 * Devuelve una copia del grafo
-	 * @return
+	 * @return Grafo copiado
 	 */
 	public Grafo copiarGrafo() {
 		return new Grafo(this.vertices, this.aristas,this.totalCompras);
@@ -180,8 +180,8 @@ public class Grafo {
 	 * Devuelve una cadena correspondiente a la matriz
 	 * de adyacencias del grafo representado por el array
 	 * de booleanos <matriz>
-	 * @param matriz
-	 * @return
+	 * @param matriz Matriz de relaciones
+	 * @return Cadena correspondiente a la matriz de adyacencia
 	 */
 	public String AdjString(boolean[][] matriz) {
 		StringBuilder sb = new StringBuilder();
