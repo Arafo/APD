@@ -2,6 +2,8 @@ package practica2.arbolsufijos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class ArbolSufijosCompacto extends ArbolSufijos {
@@ -97,7 +99,8 @@ public class ArbolSufijosCompacto extends ArbolSufijos {
 	
 	
 	public ArrayList<String> repeticionesMaximales(){
-		ArrayList<String> maximales=new ArrayList<String>();
+		LinkedHashMap<String, String> maximales=new LinkedHashMap<String, String>();
+		//ArrayList<String> maximales=new ArrayList<String>();
 		int N = super.texto.length();
 		String[] sufijos = new String[N];
 		for (int i = 0; i < N; i++) {
@@ -109,9 +112,9 @@ public class ArbolSufijosCompacto extends ArbolSufijos {
 		for (int i = 0; i < N - 1; i++) {
 			String x = repeticionMasLarga(sufijos[i], sufijos[i + 1]);
 			if (x.length() >= 2)
-				maximales.add(x);
+				maximales.put(x, x);
 		}
-		return maximales;
+		return new ArrayList<String>(maximales.keySet());
 	}
 	
 	
