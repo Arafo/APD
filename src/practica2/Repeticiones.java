@@ -9,7 +9,7 @@ import practica2.arbolsufijos.ArbolSufijosCompacto;
 public class Repeticiones {
 		
 	public static boolean debug = true;
-	public static String FICHERO_GENES = "genes/12S.fasta";
+	public static String FICHERO_GENES = "genes/";
 
 	public static void main(String[] args) {
 		
