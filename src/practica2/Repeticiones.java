@@ -1,3 +1,11 @@
+/**
+*
+* @author  Rafael Marcen Altarriba (650435)
+* @author  Jose Angel Caudevilla Casasus (649003)
+* @version 1.0
+* @date    27-01-2017
+*/
+
 package practica2;
 
 import java.util.Hashtable;
@@ -8,10 +16,18 @@ import practica2.arbolsufijos.ArbolSufijosCompacto;
 
 public class Repeticiones {
 		
-	public static boolean debug = true;
-	public static String FICHERO_GENES = "genes/";
-
+	private static boolean debug = false;
+	private static String FICHERO_GENES = "genes/12S.fasta";
+	
 	public static void main(String[] args) {
+		
+		/* Lectura de parametros */
+		for (int i = 0; i < args.length; i++) {
+			if (args[i].equals("-f"))
+				FICHERO_GENES = args[i + 1];
+			else if (args[i].equals("-d"))
+				debug = args[i + 1].equals("true") ? true : false;
+		}
 		
 		System.out.println("Fichero: " + FICHERO_GENES);
 		System.out.println("--------------------------------");
@@ -26,6 +42,7 @@ public class Repeticiones {
 		Iterator<Map.Entry<String, String>> it = genes.entrySet().iterator();
 		while (it.hasNext()) { 
 			Map.Entry<String, String> entry = it.next();
+			
 			/* Arbol compacto */
 			if (debug)
 				System.out.print("Creando arbol compacto "+ entry.getKey() + "...");
@@ -47,7 +64,8 @@ public class Repeticiones {
 				System.out.print("Repeticion mas larga: ");
 			
 			tiempo = System.currentTimeMillis();
-			System.out.println(arbol.repeticionMasLarga());
+			if (debug)
+				System.out.println(arbol.repeticionMasLarga());
 			tiempo = System.currentTimeMillis() - tiempo;
 			tiemposRepeticion[indice] = tiempo;
 			
@@ -63,7 +81,8 @@ public class Repeticiones {
 			
 			tiempo = System.currentTimeMillis();
 			for (String s : arbol.repeticionesMaximales()) {
-				System.out.println("	->" + s);
+				if (debug)
+					System.out.println("	->" + s);
 			}
 			tiempo = System.currentTimeMillis() - tiempo;
 			tiemposMaximal[indice] = tiempo;
@@ -86,6 +105,6 @@ public class Repeticiones {
 		System.out.println("TIEMPO MEDIO CREACION ARBOL: " + tiempoCreacionMedio / genes.size() + " ms");
 		System.out.println("TIEMPO MEDIO REPETICION MAS LARGA: " + tiempoRepeticionMedio / genes.size() + " ms");
 		System.out.println("TIEMPO MEDIO REPETICION MAXIMAL: " + tiempoMaximalMedio / genes.size() + " ms");
-
+		System.out.println("--------------------------------");
 	}
 }

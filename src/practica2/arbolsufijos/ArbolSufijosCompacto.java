@@ -1,3 +1,11 @@
+/**
+*
+* @author  Rafael Marcen Altarriba (650435)
+* @author  Jose Angel Caudevilla Casasus (649003)
+* @version 1.0
+* @date    27-01-2017
+*/
+
 package practica2.arbolsufijos;
 
 import java.util.ArrayList;
@@ -7,6 +15,10 @@ import java.util.List;
 
 public class ArbolSufijosCompacto extends ArbolSufijos {
 	
+	/**
+	 * 
+	 * @param texto
+	 */
 	public ArbolSufijosCompacto(String texto) {
 		super(texto);
 		crearArbol();
@@ -65,6 +77,12 @@ public class ArbolSufijosCompacto extends ArbolSufijos {
 		return nodo;		
 	}
 	
+	/**
+	 * 
+	 * @param nodo
+	 * @param alfabeto
+	 * @return
+	 */
 	private Nodo comprimirEtiquetas(Nodo nodo, int alfabeto) {
 		for (int i = 0; i < nodo.hijos.size(); i++) {
 			Nodo hijo = nodo.hijos.get(i);
@@ -103,6 +121,12 @@ public class ArbolSufijosCompacto extends ArbolSufijos {
 		return lrs;
 	}
 	
+	/**
+	 * 
+	 * @param s
+	 * @param t
+	 * @return
+	 */
 	private  String repeticionMasLarga(String s, String t){
 		int n = Math.min(s.length(), t.length());
         for (int i = 0; i < n; i++) {
@@ -112,7 +136,10 @@ public class ArbolSufijosCompacto extends ArbolSufijos {
         return s.substring(0, n);		
 	}
 	
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public ArrayList<String> repeticionesMaximales(){
 		LinkedHashMap<String, String> maximales=new LinkedHashMap<String, String>();
 		//ArrayList<String> maximales=new ArrayList<String>();

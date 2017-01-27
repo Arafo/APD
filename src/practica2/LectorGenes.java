@@ -1,3 +1,11 @@
+/**
+*
+* @author  Rafael Marcen Altarriba (650435)
+* @author  Jose Angel Caudevilla Casasus (649003)
+* @version 1.0
+* @date    27-01-2017
+*/
+
 package practica2;
 
 import java.io.BufferedReader;
@@ -10,10 +18,19 @@ public class LectorGenes {
 	
 	private String fichero;
 	
+	/**
+	 * 
+	 * 
+	 * @param fichero
+	 */
 	public LectorGenes(String fichero) {
 		this.fichero = fichero;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Hashtable<String, String> obtenerGenes() {
 		if (new File(fichero).isFile()) {
 			return obtenerGenesFichero();
@@ -24,6 +41,10 @@ public class LectorGenes {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	private Hashtable<String, String> obtenerGenesFichero() {
 		Hashtable<String, String> genes = new Hashtable<String, String>();
 		
@@ -63,6 +84,10 @@ public class LectorGenes {
 		return genes;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	private Hashtable<String, String> obtenerGenesDirectorio() {
 		Hashtable<String, String> genes = new Hashtable<String, String>();
 		
