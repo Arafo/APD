@@ -10,7 +10,7 @@ echo "Compilacion"
 javac -d bin -sourcepath src -cp src/practica2/*.java src/practica2/arbolsufijos/*.java
 
 echo "Ejecucion"
-#java -cp bin practica2.Repeticiones -f <fichero> -d <debug>
+#java -cp bin practica2.Repeticiones -f <fichero> -c <cadena> -d <debug>
 
 # genes1
 java -cp bin practica2.Repeticiones -f genes/12S.fasta -d $debug
