@@ -17,7 +17,7 @@ import practica2.arbolsufijos.ArbolSufijosCompacto;
 public class Repeticiones {
 		
 	private static boolean debug = true;
-	private static String FICHERO_GENES = "genes/12S.fasta";
+	private static String FICHERO_GENES = "";
 	private static String cadena = "";
 	
 	public static void main(String[] args) {
@@ -40,6 +40,8 @@ public class Repeticiones {
 		}
 		
 		if (!cadena.isEmpty()) {
+			System.out.println("Cadena: " + cadena);
+			System.out.println("--------------------------------");
 			genes.put(cadena, cadena);
 		}
 		
@@ -92,8 +94,9 @@ public class Repeticiones {
 			tiempo = System.currentTimeMillis();
 			for (String s : arbol.repeticionesMaximas()) {
 				if (debug)
-					System.out.println("	->" + s);
+					System.out.print(s + ", ");
 			}
+			System.out.println();
 			tiempo = System.currentTimeMillis() - tiempo;
 			tiemposMaximal[indice] = tiempo;
 

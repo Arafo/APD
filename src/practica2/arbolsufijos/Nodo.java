@@ -51,7 +51,7 @@ public class Nodo {
 	}
 	
 	/**
-	 * Añade un nuevo sufijo como rama del arbol cuya raiz es este nodo
+	 * Anade un nuevo sufijo como rama del arbol cuya raiz es este nodo
 	 * @param sufijo
 	 * @param indice
 	 */
