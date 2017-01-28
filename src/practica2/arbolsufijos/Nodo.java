@@ -1,3 +1,15 @@
+/**
+* Clase que representa un nodo del arbol. Un nodo esta compuesto por
+* su arista padre, el nodo padre, una lista de hijos, la profundidad
+* del nodo en el arbol y la longitud del string resultante desde 
+* la raiz del arbol hasta el nodo.
+*
+* @author  Rafael Marcen Altarriba (650435)
+* @author  Jose Angel Caudevilla Casasus (649003)
+* @version 1.0
+* @date    28-01-2017
+*/
+
 package practica2.arbolsufijos;
 
 import java.util.ArrayList;
@@ -10,7 +22,6 @@ public class Nodo {
 	Nodo padre = null;
 	Arista aristaPadre = null;
 	
-	List<Integer> cuentaTexto = new ArrayList<Integer>();
 	List<Nodo> hijos = null;
 	
 	int profundidadNodo = -1;
@@ -30,35 +41,28 @@ public class Nodo {
 	 * Nodo del arbol
 	 * @param etiquetaPadre
 	 * @param etiqueta
-	 * @param numTexto
 	 * @param anteriorProfundidad
 	 */
-	public Nodo(String etiquetaPadre, int etiqueta, int numTexto, int anteriorProfundidad) {
+	public Nodo(String etiquetaPadre, int etiqueta, int anteriorProfundidad) {
 		this.etiqueta = etiqueta;
 	    hijos = new ArrayList<Nodo>();
 	    aristaPadre = new Arista(etiquetaPadre, etiqueta);
-	    cuentaTexto.add(numTexto);
 	    profundidadTexto = anteriorProfundidad + etiquetaPadre.length();
 	}
 	
 	/**
-	 * 
+	 * Añade un nuevo sufijo como rama del arbol cuya raiz es este nodo
 	 * @param sufijo
 	 * @param indice
-	 * @param numTexto
 	 */
-	public void addSufijo(List<String> sufijo, int indice, int numTexto) {
+	public void addSufijo(List<String> sufijo, int indice) {
 	    Nodo insertarEn = this;
 	    insertarEn = buscar(this, sufijo, indice);
-	    if (sufijo.isEmpty()) {
-	    	insertarEn.cuentaTexto.add(numTexto);
-	    } else {
-	    	insertar(insertarEn, sufijo, indice, numTexto);
-	    }    
+	    insertar(insertarEn, sufijo, indice);
 	}
 	
 	/**
-	 * 
+	 * Busca el nodo del arbol donde debe empezar la nueva rama
 	 * @param nodoInicio
 	 * @param sufijo
 	 * @param indice
@@ -79,22 +83,21 @@ public class Nodo {
 	}
 	
 	/**
-	 * 
+	 * Inserta un nodo en la posicion dada del arbol
 	 * @param insertarEn
 	 * @param sufijo
 	 * @param indice
-	 * @param numTexto
 	 */
-	private void insertar(Nodo insertarEn, List<String> sufijo, int indice, int numTexto) {
+	private void insertar(Nodo insertarEn, List<String> sufijo, int indice) {
 		for (String x : sufijo) {
-			Nodo hijo = new Nodo(x, indice, numTexto, insertarEn.profundidadTexto);
+			Nodo hijo = new Nodo(x, indice, insertarEn.profundidadTexto);
 			insertarEn.hijos.add(hijo);
 			insertarEn = hijo;	
 		}	
 	}
 	
 	/**
-	 * 
+	 * Representacion de un nodo
 	 */
 	public String toString() {
 		StringBuilder resultado = new StringBuilder();
@@ -110,7 +113,7 @@ public class Nodo {
 	}
 	
 	/**
-	 * 
+	 * Tabula el arbol segun la profunidad de nodo
 	 * @param nodo
 	 * @return
 	 */

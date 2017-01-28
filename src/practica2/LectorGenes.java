@@ -1,3 +1,12 @@
+/**
+* Lector de ficheros de tipo FASTA
+*
+* @author  Rafael Marcen Altarriba (650435)
+* @author  Jose Angel Caudevilla Casasus (649003)
+* @version 1.0
+* @date    28-01-2017
+*/
+
 package practica2;
 
 import java.io.BufferedReader;
@@ -10,10 +19,19 @@ public class LectorGenes {
 	
 	private String fichero;
 	
+	/**
+	 * Constructor
+	 * @param fichero
+	 */
 	public LectorGenes(String fichero) {
 		this.fichero = fichero;
 	}
 	
+	/**
+	 * Devuelve una tabla hash con los genes correspondientes
+	 * del fichero
+	 * @return
+	 */
 	public Hashtable<String, String> obtenerGenes() {
 		if (new File(fichero).isFile()) {
 			return obtenerGenesFichero();
@@ -21,9 +39,13 @@ public class LectorGenes {
 		else if (new File(fichero).isDirectory()) {
 			return obtenerGenesDirectorio();
 		}
-		return null;
+		return new Hashtable<String, String>();
 	}
 
+	/**
+	 * Devuelve una tabla hash con los genes del fichero
+	 * @return
+	 */
 	private Hashtable<String, String> obtenerGenesFichero() {
 		Hashtable<String, String> genes = new Hashtable<String, String>();
 		
@@ -63,6 +85,10 @@ public class LectorGenes {
 		return genes;
 	}
 	
+	/**
+	 * Devuelve una tabla hash con los genes del directorio
+	 * @return
+	 */
 	private Hashtable<String, String> obtenerGenesDirectorio() {
 		Hashtable<String, String> genes = new Hashtable<String, String>();
 		
