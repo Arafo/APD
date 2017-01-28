@@ -1,0 +1,51 @@
+Marcén Altarriba, Rafael	650435@unizar.es	a650435
+Caudevilla Casasús, Jose Angel	649003@unizar.es	a649003
+
+#################################
+# ORGANIZACIÓN
+#################################
+
+Marcén Altarriba, Rafael 
+	- Diseño del árbol de sufijos.
+	- Diseño de las pruebas
+
+Caudevilla Casasús, Jose Angel
+	- Diseño del algoritmo de repetición más larga
+	- Diseño del algoritmo de repeticiones maximales
+
+#################################
+# REALIZACIÓN DE PRUEBAS
+#################################
+Para la realización de la pruebas se ha creado el script 'ejecutar2.sh'. Dicho script realiza la ejecución de los distintos pruebas de formal secuencial. La forma de ejecutar el script es la siguiente:
+	./ejecutar2.sh
+
+En este script se realizan todos las siguientes pruebas:
+
+#genes1
+java -cp bin practica2.Repeticiones -f genes/genes1/12S.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes1/16S.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes1/Ala.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes1/Arg.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes1/Asn.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes1/ATP6.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes1/ATP8.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes1/CO1.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes1/CO2.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes1/CO3.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes1/CYB.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes1/Cys.fasta -d $debug
+
+Si se desea, también se puede realizar la realización de las pruebas usando directamente el fichero java mediante la ejecución de:
+	java -cp bin practica2.Repeticiones -f <fichero> -c <cadena> -d <debug>
+
+#################################
+# NOTAS ADICCIONALES
+#################################
+
+El programa posee las siguientes opciones de ejecución:
+
+	-f Fichero en formato FASTA
+	-c Cadena para construir un árbol de sufijos
+	-d Debug. Para ver las acciones intermedias
+		false -> No
+		true -> Si
