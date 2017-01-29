@@ -41,6 +41,8 @@ public class Repeticiones {
 		}
 		
 		if (!cadena.isEmpty()) {
+			System.out.println("Cadena: " + cadena);
+			System.out.println("--------------------------------");
 			genes.put(cadena, cadena);
 		}
 		
