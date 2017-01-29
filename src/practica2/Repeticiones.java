@@ -10,14 +10,15 @@ package practica2;
 
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import practica2.arbolsufijos.ArbolSufijosCompacto;
 
 public class Repeticiones {
 		
-	private static boolean debug = true;
-	private static String FICHERO_GENES = "genes/12S.fasta";
+	private static boolean debug = false;
+	private static String FICHERO_GENES = "";
 	private static String cadena = "";
 	
 	public static void main(String[] args) {
@@ -57,9 +58,9 @@ public class Repeticiones {
 			if (debug)
 				System.out.print("Creando arbol compacto "+ entry.getKey() + "...");
 			
-			long tiempo = System.currentTimeMillis();
+			long tiempo = System.nanoTime();
 			ArbolSufijosCompacto arbol = new ArbolSufijosCompacto(entry.getValue());
-			tiempo = System.currentTimeMillis() - tiempo;
+			tiempo = System.nanoTime() - tiempo;
 			tiemposCreacion[indice] = tiempo;
 
 			if (debug) {
@@ -73,13 +74,13 @@ public class Repeticiones {
 			if (debug)
 				System.out.print("Repeticion mas larga: ");
 			
-			tiempo = System.currentTimeMillis();
-			if (debug)
-				System.out.println(arbol.repeticionMasLarga());
-			tiempo = System.currentTimeMillis() - tiempo;
+			tiempo = System.nanoTime();
+			String repeticion = arbol.repeticionMasLarga();
+			tiempo = System.nanoTime() - tiempo;
 			tiemposRepeticion[indice] = tiempo;
 			
 			if (debug) {
+				System.out.println(repeticion);
 				System.out.println("Tiempo: " + tiempo + " ms");
 			}
 			
@@ -89,15 +90,15 @@ public class Repeticiones {
 				System.out.println("Repeticion maximales:");
 			}
 			
-			tiempo = System.currentTimeMillis();
-			for (String s : arbol.repeticionesMaximas()) {
-				if (debug)
-					System.out.println("	->" + s);
-			}
-			tiempo = System.currentTimeMillis() - tiempo;
+			tiempo = System.nanoTime();
+			List<String> maximales = arbol.repeticionesMaximales();
+			tiempo = System.nanoTime() - tiempo;
 			tiemposMaximal[indice] = tiempo;
 
 			if (debug) {
+				for (String s : maximales) {
+					System.out.println("	->" + s);
+				}
 				System.out.println("Tiempo: " + tiempo + " ms");
 				System.out.println("--------------------------------");
 			}		
@@ -112,9 +113,9 @@ public class Repeticiones {
 			tiempoRepeticionMedio += tiemposRepeticion[i];
 			tiempoMaximalMedio += tiemposMaximal[i];
 		}
-		System.out.println("TIEMPO MEDIO CREACION ARBOL: " + tiempoCreacionMedio / size + " ms");
-		System.out.println("TIEMPO MEDIO REPETICION MAS LARGA: " + tiempoRepeticionMedio / size + " ms");
-		System.out.println("TIEMPO MEDIO REPETICION MAXIMAL: " + tiempoMaximalMedio / size + " ms");
+		System.out.println("TIEMPO MEDIO CREACION ARBOL: " + tiempoCreacionMedio / size + " ns");
+		System.out.println("TIEMPO MEDIO REPETICION MAS LARGA: " + tiempoRepeticionMedio / size + " ns");
+		System.out.println("TIEMPO MEDIO REPETICION MAXIMAL: " + tiempoMaximalMedio / size + " ns");
 		System.out.println("--------------------------------");
 	}
 }

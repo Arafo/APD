@@ -6,7 +6,7 @@
 * @author  Rafael Marcen Altarriba (650435)
 * @author  Jose Angel Caudevilla Casasus (649003)
 * @version 1.0
-* @date    28-01-2017
+* @date    29-01-2017
 */
 
 package practica2.arbolsufijos;
@@ -67,10 +67,6 @@ public class ArbolSufijosCompacto extends ArbolSufijos {
 				hijo.aristaPadre.etiqueta += ", " + nieto.aristaPadre.etiqueta;
 				hijo.profundidadTexto += nieto.aristaPadre.etiqueta.length();
 				hijo.hijos = nieto.hijos;
-	            //hijo.cuentaTexto = nieto.cuentaTexto;
-
-				//for (Nodo nietoAux : hijo.hijos)
-					//nietoAux.padre = nodo;	
 			}
 			hijo = compactarNodos(hijo, profundidadNodo + 1);	
 		}
@@ -111,9 +107,9 @@ public class ArbolSufijosCompacto extends ArbolSufijos {
 	 * Devuelve las repeticiones maximas dentro del arbol de sufijos
 	 * @return
 	 */
-	public ArrayList<String> repeticionesMaximas(){
+	public ArrayList<String> repeticionesMaximales(){
 		HashMap<String, String> repeticiones=new HashMap<String, String>();
-		repeticionesMaximas(super.raiz, "",repeticiones);
+		repeticionesMaximales(super.raiz, "",repeticiones);
 		return new ArrayList<String>(repeticiones.values());	
 	}
 	
@@ -142,7 +138,8 @@ public class ArbolSufijosCompacto extends ArbolSufijos {
 				try {
 					int from = Integer.parseInt(fromTo[0]);
 					int to = Integer.parseInt(fromTo[1]);
-					etiquetaHijo = super.texto.substring(from-1, to);	
+					if (from <= to)
+						etiquetaHijo = super.texto.substring(from-1, to);	
 				}
 				catch (NumberFormatException e) {
 					etiquetaHijo = etiquetaHijo.replace(", ", "");
@@ -170,7 +167,7 @@ public class ArbolSufijosCompacto extends ArbolSufijos {
 	 * @param texto
 	 * @return
 	 */
-	private String repeticionesMaximas(Nodo nodo, String texto,HashMap<String, String> maximos) {
+	private String repeticionesMaximales(Nodo nodo, String texto,HashMap<String, String> maximos) {
 		// Si tiene menos de dos hijos no es una repeticion
 		if (nodo.hijos.size() < 2) {
 			return texto;      
@@ -187,7 +184,8 @@ public class ArbolSufijosCompacto extends ArbolSufijos {
 				try {
 					int from = Integer.parseInt(fromTo[0]);
 					int to = Integer.parseInt(fromTo[1]);
-					etiquetaHijo = super.texto.substring(from-1, to);	
+					if (from <= to)
+						etiquetaHijo = super.texto.substring(from-1, to);	
 				}
 				catch (NumberFormatException e) {
 					etiquetaHijo = etiquetaHijo.replace(", ", "");
@@ -198,7 +196,7 @@ public class ArbolSufijosCompacto extends ArbolSufijos {
 		
 		// Se busca en los hijos el mayor string repetido
 		for (Nodo hijo : nodo.hijos) {
-			String nuevo = repeticionesMaximas(hijo, texto,maximos);
+			String nuevo = repeticionesMaximales(hijo, texto,maximos);
 
 			if (nuevo != null && nuevo.length() >= 2) {
 				maximos.put(nuevo, nuevo) ;

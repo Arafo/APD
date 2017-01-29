@@ -21,19 +21,40 @@ Para la realización de la pruebas se ha creado el script 'ejecutar2.sh'. Dicho s
 
 En este script se realizan todos las siguientes pruebas:
 
+#cadenas
+java -cp bin practica2.Repeticiones -c banana -d true
+java -cp bin practica2.Repeticiones -c mississippi -d true
+java -cp bin practica2.Repeticiones -c ABABABA -d true
+java -cp bin practica2.Repeticiones -c ATCGATCGA -d true
+java -cp bin practica2.Repeticiones -c abcpqrabpqpq -d true
+
 #genes1
-java -cp bin practica2.Repeticiones -f genes/genes1/12S.fasta -d $debug
-java -cp bin practica2.Repeticiones -f genes/genes1/16S.fasta -d $debug
 java -cp bin practica2.Repeticiones -f genes/genes1/Ala.fasta -d $debug
 java -cp bin practica2.Repeticiones -f genes/genes1/Arg.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes1/Asp.fasta -d $debug
 java -cp bin practica2.Repeticiones -f genes/genes1/Asn.fasta -d $debug
-java -cp bin practica2.Repeticiones -f genes/genes1/ATP6.fasta -d $debug
-java -cp bin practica2.Repeticiones -f genes/genes1/ATP8.fasta -d $debug
-java -cp bin practica2.Repeticiones -f genes/genes1/CO1.fasta -d $debug
-java -cp bin practica2.Repeticiones -f genes/genes1/CO2.fasta -d $debug
-java -cp bin practica2.Repeticiones -f genes/genes1/CO3.fasta -d $debug
-java -cp bin practica2.Repeticiones -f genes/genes1/CYB.fasta -d $debug
 java -cp bin practica2.Repeticiones -f genes/genes1/Cys.fasta -d $debug
+
+#genes2
+java -cp bin practica2.Repeticiones -f genes/genes2/Leu1.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes2/Gln.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes2/Leu2.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes2/Lys.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes2/Glu.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes2/His.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes2/Ile.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes2/Gly.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes2/Met.fasta -d $debug
+
+#genes3
+java -cp bin practica2.Repeticiones -f genes/genes3/Phe.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes3/Ser1.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes3/Val.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes3/Pro.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes3/Trp.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes3/Thr.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes3/Tyr.fasta -d $debug
+java -cp bin practica2.Repeticiones -f genes/genes3/Ser2.fasta -d $debug
 
 Si se desea, también se puede realizar la realización de las pruebas usando directamente el fichero java mediante la ejecución de:
 	java -cp bin practica2.Repeticiones -f <fichero> -c <cadena> -d <debug>

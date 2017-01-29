@@ -7,7 +7,7 @@ public class Test {
 		ArbolSufijosCompacto compacto=new ArbolSufijosCompacto("BANANAS");
 		System.out.println(compacto.repeticionMasLarga());
 		System.out.println("Repeticiones maximas");
-		for(String s:compacto.repeticionesMaximas())
+		for(String s:compacto.repeticionesMaximales())
 			System.out.println("	->"+s);
 	}
 
